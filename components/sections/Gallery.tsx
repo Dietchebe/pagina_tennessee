@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import SectionTitle from '@/components/ui/SectionTitle'
+import SectionDivider from '@/components/ui/SectionDivider'
 
 type Column =
   | { type: 'tall'; w: string; label: string }
@@ -92,7 +93,8 @@ export default function Gallery() {
   }, [])
 
   return (
-    <section id="galeria" className="relative py-24 md:py-32 px-6">
+    <section id="galeria" className="relative bg-transparent pt-24 md:pt-32 px-6">
+      <SectionDivider />
       <div className="max-w-7xl mx-auto">
         <SectionTitle eyebrow="Galería" title="Nuestro trabajo" />
 
@@ -100,7 +102,7 @@ export default function Gallery() {
             Cuando se completa el set, hace loop sin corte (track duplicado). */}
         <div
           ref={trackRef}
-          className="flex gap-3 overflow-x-auto overflow-y-hidden mb-10 h-[460px] md:h-[560px] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-3 overflow-x-auto overflow-y-hidden h-[460px] md:h-[560px] [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {TRACK.map((col, i) => (
@@ -117,6 +119,9 @@ export default function Gallery() {
           ))}
         </div>
 
+        <div className="relative h-40 md:h-60">
+          <div className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 mx-auto max-w-4xl h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
+        </div>
       </div>
     </section>
   )

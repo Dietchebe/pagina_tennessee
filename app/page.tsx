@@ -15,19 +15,24 @@ export default function Page() {
     <>
       <Header />
 
-      <main>
-        <Hero />
-        <ScrollLightShell>
+      <ScrollLightShell>
+        <main>
+          <Hero />
           <Gallery />
           <BrandPillars />
           <Services />
           <Promotions />
           <Location />
-        </ScrollLightShell>
-        <BookingCTA />
-      </main>
+          <BookingCTA />
+        </main>
 
-      <Footer />
+        <Footer />
+      </ScrollLightShell>
+
+      {/*
+        El botón flotante se mantiene fuera del shell para que no participe del
+        apilado visual del fondo y quede siempre nítido.
+      */}
       <FloatingBookingButton />
     </>
   )

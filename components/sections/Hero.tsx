@@ -22,14 +22,14 @@ export default function Hero() {
             <source src="/videos/hero.mp4" type="video/mp4" />
           </video>
         */}
-        <div className="w-full h-full bg-[#0D0D0D]">
-          {/* Gradiente cálido simulando iluminación de barbería */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_40%,#2a2a2a_0%,#0D0D0D_65%)]" />
+        <div className="w-full h-full bg-transparent">
+          {/* Viñeta tenue para no perder legibilidad mientras el halo global queda visible */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(13,13,13,0.14)_58%,rgba(13,13,13,0.34)_100%)]" />
         </div>
       </div>
 
       {/* Overlay oscuro */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/52 via-black/24 to-black/62" />
 
       {/* Contenido */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-28 pb-16">

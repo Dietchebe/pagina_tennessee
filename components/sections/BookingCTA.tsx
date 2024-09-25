@@ -3,11 +3,8 @@ import { WHATSAPP_URL } from '@/lib/constants'
 
 export default function BookingCTA() {
   return (
-    <section className="relative bg-[#0D0D0D] py-32 md:py-40 px-6 overflow-hidden">
-      {/* Acento de luz desde arriba */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-64 bg-brand-amber/5 blur-3xl rounded-full pointer-events-none" />
-
+    <section className="relative bg-transparent py-20 md:py-24 px-6 overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="text-brand-amber text-[10px] tracking-[0.5em] uppercase mb-10 font-sans">
           — ¿Aún no estás convencido? —
@@ -31,9 +28,6 @@ export default function BookingCTA() {
           Tennessee Barber Shop · Las Condes, Santiago
         </p>
       </div>
-
-      {/* Acento de luz desde abajo */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#333333] to-transparent" />
     </section>
   )
 }

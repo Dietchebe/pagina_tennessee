@@ -1,22 +1,66 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import SectionTitle from '@/components/ui/SectionTitle'
+import SectionDivider from '@/components/ui/SectionDivider'
 
 const GOOGLE_MAPS_URL =
   'https://www.google.com/maps/place/Tennessee+Barbershop/@-33.3738227,-70.5205687,17z/data=!3m1!4b1!4m6!3m5!1s0x9662cbfbbb73da77:0xb5a3a9f83a4f8e1f!8m2!3d-33.3738227!4d-70.5179938!16s%2Fg%2F11hdcc1ncl?entry=ttu&g_ep=EgoyMDI2MDQyOC4wIKXMDSoASAFQAw%3D%3D'
 
+const INGRESS_IMAGES = [
+  '/assets/imagenes/foto_ingreso/f1_ingreso.JPG',
+  '/assets/imagenes/foto_ingreso/f2_ingreso.JPG',
+  '/assets/imagenes/foto_ingreso/f3_ingreso.JPG',
+  '/assets/imagenes/foto_ingreso/f4_ingreso.JPG',
+  '/assets/imagenes/foto_ingreso/f5_ingreso.JPG',
+]
+
 export default function Location() {
+  const [activeImage, setActiveImage] = useState(0)
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveImage((current) => (current + 1) % INGRESS_IMAGES.length)
+    }, 4000)
+
+    return () => window.clearInterval(interval)
+  }, [])
+
   return (
-    <section id="ubicacion" className="relative border-t border-[#2A1F10] py-24 md:py-32 px-6">
+    <section id="ubicacion" className="relative bg-transparent py-24 md:py-32 px-6">
+      <SectionDivider />
       <div className="max-w-7xl mx-auto">
         <SectionTitle
           eyebrow="Ubicación"
           title="Estamos en Nueva Costanera 12255"
-          subtitle="Cantagallo, local 36"
+          subtitle="Cantagallo, local 36, 2do piso"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.95fr] gap-6 md:gap-8">
           <div className="border border-[#333333] bg-[#1a1a1a] min-h-[320px] md:min-h-[420px] relative overflow-hidden rounded-[1.5rem]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#2a2a2a_0%,transparent_55%)]" />
-            <div className="absolute inset-0 border-0" />
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.05)_50%,rgba(0,0,0,0.2)_100%)]" />
+
+            {INGRESS_IMAGES.map((src, index) => (
+              <div
+                key={src}
+                className={`absolute inset-0 transition-opacity duration-700 ${
+                  index === activeImage ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <Image
+                  src={src}
+                  alt={`Entrada Tennessee ${index + 1}`}
+                  fill
+                  priority={index === 0}
+                  className="media-monochrome object-cover object-center"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                />
+              </div>
+            ))}
+
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/35 to-transparent" />
           </div>
 
           <div className="border border-[#333333] bg-[#0D0D0D] min-h-[320px] md:min-h-[420px] overflow-hidden relative rounded-[1.5rem]">

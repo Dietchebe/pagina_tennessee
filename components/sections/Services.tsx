@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import SectionTitle from '@/components/ui/SectionTitle'
+import SectionDivider from '@/components/ui/SectionDivider'
 import { SERVICES } from '@/lib/constants'
 
 type Tab = keyof typeof SERVICES
@@ -20,7 +21,8 @@ export default function Services() {
   const [active, setActive] = useState<Tab>('cortes')
 
   return (
-    <section id="servicios" className="relative border-t border-[#2A1F10] py-12 md:py-16 px-6">
+    <section id="servicios" className="relative bg-transparent py-12 md:py-16 px-6">
+      <SectionDivider />
       <div className="max-w-3xl mx-auto">
         <SectionTitle
           eyebrow="Servicios"

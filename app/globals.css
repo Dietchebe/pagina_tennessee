@@ -40,6 +40,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.media-monochrome {
+  filter: grayscale(1) contrast(1.08) brightness(0.96) saturate(0);
+}
+
 /* ── Scrollbar minimalista ── */
 ::-webkit-scrollbar {
   width: 3px;

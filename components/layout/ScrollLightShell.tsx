@@ -1,76 +1,21 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
-
 type ScrollLightShellProps = {
   children: React.ReactNode
 }
 
 export default function ScrollLightShell({ children }: ScrollLightShellProps) {
-  const shellRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    const shell = shellRef.current
-    if (!shell) return
-
-    let rafId = 0
-
-    const updateGlow = () => {
-      const rect = shell.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-      const total = rect.height + viewportHeight
-      const rawProgress = (viewportHeight - rect.top) / total
-      const progress = Math.min(1, Math.max(0, rawProgress))
-
-      const y = progress * Math.max(rect.height - 260, 0)
-      const x = 52 + Math.sin(progress * Math.PI * 1.15) * 9
-      const opacity = 0.18 + Math.sin(progress * Math.PI) * 0.12
-
-      shell.style.setProperty('--scroll-glow-y', `${y}px`)
-      shell.style.setProperty('--scroll-glow-x', `${x}%`)
-      shell.style.setProperty('--scroll-glow-opacity', opacity.toFixed(3))
-    }
-
-    const onScroll = () => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(updateGlow)
-    }
-
-    updateGlow()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-
-    return () => {
-      cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [])
-
   return (
-    <div
-      ref={shellRef}
-      className="relative isolate overflow-hidden bg-[#0D0D0D]"
-      style={
-        {
-          ['--scroll-glow-y' as string]: '0px',
-          ['--scroll-glow-x' as string]: '52%',
-          ['--scroll-glow-opacity' as string]: '0.18',
-        } as React.CSSProperties
-      }
-    >
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#0D0D0D_0%,#111111_38%,#0D0D0D_100%)]" />
+    <div className="relative isolate min-h-svh overflow-x-clip bg-[#0D0D0D]">
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,#0D0D0D_0%,#111111_38%,#0D0D0D_100%)]" />
+
       <div
-        className="pointer-events-none absolute top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-brand-amber/20 blur-[140px] transition-transform duration-150 ease-out"
-        style={{
-          left: 'var(--scroll-glow-x)',
-          transform: 'translate3d(-50%, var(--scroll-glow-y), 0)',
-          opacity: 'var(--scroll-glow-opacity)',
-        }}
-      />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(255,255,255,0.018)_35%,transparent_100%)]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#333333] to-transparent" />
+        aria-hidden="true"
+        className="pointer-events-none fixed left-1/2 top-[42svh] z-[1] h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 sm:h-[40rem] sm:w-[40rem] lg:h-[46rem] lg:w-[46rem]"
+      >
+        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(217,169,90,0.30)_0%,rgba(196,134,58,0.19)_18%,rgba(196,134,58,0.11)_36%,rgba(196,134,58,0.05)_56%,rgba(196,134,58,0.02)_70%,transparent_84%)] blur-[12px]" />
+        <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(245,237,216,0.07)_0%,rgba(217,169,90,0.10)_28%,rgba(196,134,58,0.04)_54%,transparent_76%)] blur-[30px]" />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 z-[2] bg-[linear-gradient(180deg,transparent_0%,rgba(255,255,255,0.015)_35%,transparent_100%)]" />
       <div className="relative z-10">{children}</div>
     </div>
   )

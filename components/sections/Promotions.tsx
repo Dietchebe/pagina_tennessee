@@ -1,9 +1,11 @@
 import SectionTitle from '@/components/ui/SectionTitle'
+import SectionDivider from '@/components/ui/SectionDivider'
 import { PROMOTIONS } from '@/lib/constants'
 
 export default function Promotions() {
   return (
-    <section className="relative py-10 md:py-14 px-6">
+    <section className="relative bg-transparent py-10 md:py-14 px-6">
+      <SectionDivider />
       <div className="max-w-7xl mx-auto">
         <SectionTitle eyebrow="Promociones" title="Promociones" />
 

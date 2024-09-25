@@ -48,6 +48,16 @@ const PROFILES = [
   },
 ]
 
+function DividerBand() {
+  return (
+    <div className="px-6">
+      <div className="relative h-16 md:h-20">
+        <div className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 mx-auto max-w-4xl h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
+      </div>
+    </div>
+  )
+}
+
 export default function BrandPillars() {
   const [activeProfile, setActiveProfile] = useState(0)
 
@@ -62,15 +72,15 @@ export default function BrandPillars() {
   const profile = PROFILES[activeProfile]
 
   return (
-    <section id="nosotros" className="relative border-t border-[#2A1F10]">
+    <section id="nosotros" className="relative bg-transparent">
       <div className="max-w-7xl mx-auto">
-        <div className="px-6 py-24 md:py-32">
-          <div className="max-w-3xl">
+        <div className="px-6 pt-1 pb-8 md:pt-8 md:pb-10">
+          <div className="max-w-3xl mx-auto lg:mx-0">
             <div className="lg:sticky lg:top-32">
-              <p className="text-brand-amber text-[10px] tracking-[0.35em] uppercase mb-5 font-sans">
+              <p className="text-brand-amber text-[10px] tracking-[0.35em] uppercase mb-5 font-sans text-center lg:text-left">
                 — Nosotros —
               </p>
-              <h2 className="font-serif text-4xl md:text-5xl text-brand-cream leading-tight mb-5">
+              <h2 className="font-serif text-4xl md:text-5xl text-brand-cream leading-tight mb-5 text-center lg:text-left">
                 No solo cortamos.
                 <br />
                 <em className="text-brand-amber">Asesoramos.</em>
@@ -100,24 +110,22 @@ export default function BrandPillars() {
                   </div>
                 </div>
 
-                <p className="text-brand-muted text-base md:text-lg leading-relaxed">
-                  {profile.slogan}
-                </p>
-              </div>
-
-              <div className="mt-12 pt-8 border-t border-[#2A1F10]">
-                <p className="text-brand-muted/50 text-[10px] tracking-[0.35em] uppercase font-sans italic">
-                  
-                </p>
+                <div className="min-h-[7rem] md:min-h-[6rem]">
+                  <p className="text-brand-muted text-base md:text-lg leading-relaxed">
+                    {profile.slogan}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="mx-auto max-w-4xl h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent mt-10 md:mt-12" />
         </div>
 
-        <div className="px-6 py-20 md:py-32 border-t border-[#2A1F10]">
+        <div className="px-6 pt-10 pb-14 md:pt-12 md:pb-20">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-14 md:mb-20 max-w-2xl mx-auto text-center">
-              <p className="text-brand-amber text-[10px] tracking-[0.35em] uppercase mb-5 font-sans">
+            <div className="mb-8 md:mb-10 max-w-2xl mx-auto text-center">
+              <p className="text-brand-amber text-[10px] tracking-[0.35em] uppercase mb-3 font-sans">
                 — Por qué nosotros —
               </p>
               <h3 className="font-serif text-4xl md:text-5xl text-brand-cream leading-tight">
@@ -129,7 +137,7 @@ export default function BrandPillars() {
               {PILLARS.map((pillar) => (
                 <div
                   key={pillar.number}
-                  className="bg-[#0D0D0D] hover:bg-[#141008] transition-colors duration-300 p-8 md:p-10"
+                  className="bg-[#0D0D0D] hover:bg-[#141008] transition-colors duration-300 p-7 md:p-8"
                 >
                   <span className="font-serif text-brand-amber/50 text-4xl mb-6 block leading-none">
                     {pillar.number}

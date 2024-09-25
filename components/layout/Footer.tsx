@@ -65,7 +65,8 @@ const SOCIAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A0704] border-t border-[#333333]">
+    <footer className="relative bg-transparent">
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14 text-center md:text-left">
           {/* Brand */}
@@ -106,7 +107,7 @@ export default function Footer() {
           </div>
 
           {/* Horarios */}
-          <div>
+          <div id="horarios">
             <h4 className="text-brand-cream font-sans text-[10px] tracking-[0.3em] uppercase mb-6">
               Horarios
             </h4>
@@ -152,7 +153,7 @@ export default function Footer() {
                 </svg>
                 @tennesseebarbershop
               </a>
-              <div className="pt-8 border-t border-[#333333] w-full">
+              <div className="pt-10 border-t border-white/10 w-full">
                 <p className="text-brand-cream font-sans text-[10px] tracking-[0.3em] uppercase mb-3">
                   Trabaja con nosotros
                 </p>
@@ -167,7 +168,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-[#333333] pt-8 flex flex-col md:flex-row justify-between items-center gap-3">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-3">
           <p className="text-brand-muted/40 text-xs font-sans">
             © {new Date().getFullYear()} Tennessee Barber Shop · Las Condes, Santiago
           </p>
@@ -176,7 +177,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="border-t border-[#333333] mt-8 pt-8">
+        <div className="border-t border-white/10 mt-8 pt-8">
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             {SOCIAL_LINKS.map((link) => (
               link.href ? (
@@ -186,7 +187,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[#333333] bg-[#0D0D0D] text-brand-amber hover:text-brand-cream hover:border-brand-amber/50 transition-colors duration-200"
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/10 bg-white/[0.03] text-brand-amber hover:text-brand-cream hover:border-brand-amber/50 transition-colors duration-200"
                   title={link.label}
                 >
                   {link.icon}
@@ -196,7 +197,7 @@ export default function Footer() {
                   key={link.label}
                   aria-label={`${link.label} próximamente`}
                   title="Próximamente"
-                  className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-[#333333] bg-[#0D0D0D] text-brand-muted/40 cursor-default"
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/10 bg-white/[0.03] text-brand-muted/40 cursor-default"
                 >
                   {link.icon}
                 </span>
