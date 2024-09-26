@@ -44,6 +44,29 @@ body {
   filter: grayscale(1) contrast(1.08) brightness(0.96) saturate(0);
 }
 
+.gallery-marquee__track {
+  animation: gallery-marquee var(--gallery-duration, 28s) linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes gallery-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-marquee__track {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 /* ── Scrollbar minimalista ── */
 ::-webkit-scrollbar {
   width: 3px;

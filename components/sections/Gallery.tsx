@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import SectionTitle from '@/components/ui/SectionTitle'
 import SectionDivider from '@/components/ui/SectionDivider'
@@ -90,118 +90,31 @@ const COLUMNS: Column[] = [
 const TRACK = [...COLUMNS, ...COLUMNS]
 
 export default function Gallery() {
-  const trackRef = useRef<HTMLDivElement | null>(null)
-  const rafRef = useRef<number | null>(null)
-  const loopWidthRef = useRef(0)
-  const pausedRef = useRef(false)
-  const lastTimestampRef = useRef(0)
-  const offsetRef = useRef(0)
-
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-
-    const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches
-    if (prefersReducedMotion) return
-
-    const speed = window.matchMedia('(min-width: 1024px)').matches ? 46 : 32
-
-    const pause = () => {
-      pausedRef.current = true
-    }
-
-    const resume = () => {
-      pausedRef.current = false
-      lastTimestampRef.current = 0
-    }
-
-    const measureLoopWidth = () => {
-      const halfIndex = Math.floor(track.children.length / 2)
-      const halfTrack = track.children[halfIndex] as HTMLElement | undefined
-
-      loopWidthRef.current = halfTrack?.offsetLeft ?? track.scrollWidth / 2
-
-      if (loopWidthRef.current > 0) {
-        offsetRef.current = offsetRef.current % loopWidthRef.current
-        track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`
-      }
-    }
-
-    measureLoopWidth()
-
-    const resizeObserver = new ResizeObserver(measureLoopWidth)
-    resizeObserver.observe(track)
-    const onVisibilityChange = () => {
-      if (document.hidden) {
-        pause()
-      } else {
-        resume()
-      }
-    }
-
-    document.addEventListener('visibilitychange', onVisibilityChange)
-
-    const step = (timestamp: number) => {
-      if (!lastTimestampRef.current) lastTimestampRef.current = timestamp
-
-      const loopWidth = loopWidthRef.current
-      const deltaSeconds = (timestamp - lastTimestampRef.current) / 1000
-      lastTimestampRef.current = timestamp
-
-      if (!pausedRef.current && !document.hidden && loopWidth > 0) {
-        let nextOffset = offsetRef.current + speed * deltaSeconds
-
-        if (nextOffset >= loopWidth) {
-          nextOffset -= loopWidth
-        }
-
-        offsetRef.current = nextOffset
-        track.style.transform = `translate3d(${-nextOffset}px, 0, 0)`
-      }
-
-      rafRef.current = requestAnimationFrame(step)
-    }
-
-    rafRef.current = requestAnimationFrame(step)
-
-    return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
-      resizeObserver.disconnect()
-      document.removeEventListener('visibilitychange', onVisibilityChange)
-    }
-  }, [])
-
   return (
     <section id="galeria" className="relative bg-transparent pt-24 md:pt-32 px-6">
       <div className="max-w-7xl mx-auto">
         <SectionTitle eyebrow="Galería" title="Nuestro trabajo" />
 
-        {/* Collage horizontal con auto-deslizamiento + swipe manual.
-            Cuando se completa el set, hace loop sin corte (track duplicado). */}
         <div
-        ref={trackRef}
-          className="flex w-max gap-3 overflow-hidden h-[460px] md:h-[560px] pointer-events-none select-none will-change-transform"
+          className="gallery-marquee overflow-hidden h-[460px] md:h-[560px] pointer-events-none select-none"
           style={{
-            transform: 'translate3d(0, 0, 0)',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            touchAction: 'none',
-          }}
+            '--gallery-duration': '28s',
+          } as CSSProperties}
         >
-          {TRACK.map((col, i) => (
-            <div key={i} className={`${col.w} flex flex-col gap-3 shrink-0`}>
-              {col.type === 'tall' ? (
-                <MediaTile item={col.top} />
-              ) : (
-                <>
+          <div className="gallery-marquee__track flex w-max gap-3">
+            {TRACK.map((col, i) => (
+              <div key={i} className={`${col.w} flex flex-col gap-3 shrink-0`}>
+                {col.type === 'tall' ? (
                   <MediaTile item={col.top} />
-                  <MediaTile item={col.bottom} />
-                </>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <>
+                    <MediaTile item={col.top} />
+                    <MediaTile item={col.bottom} />
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
         <div className="pt-10 md:pt-12">
           <SectionDivider />
