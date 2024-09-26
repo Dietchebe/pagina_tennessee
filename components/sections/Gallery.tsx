@@ -94,9 +94,7 @@ export default function Gallery() {
   const rafRef = useRef<number | null>(null)
   const loopWidthRef = useRef(0)
   const pausedRef = useRef(false)
-  const pointerDownRef = useRef(false)
   const lastTimestampRef = useRef(0)
-  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const track = trackRef.current
@@ -111,23 +109,11 @@ export default function Gallery() {
 
     const pause = () => {
       pausedRef.current = true
-      if (resumeTimeoutRef.current) {
-        clearTimeout(resumeTimeoutRef.current)
-        resumeTimeoutRef.current = null
-      }
     }
 
     const resume = () => {
       pausedRef.current = false
       lastTimestampRef.current = 0
-    }
-
-    const scheduleResume = (delay = 1200) => {
-      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
-      resumeTimeoutRef.current = setTimeout(() => {
-        pointerDownRef.current = false
-        resume()
-      }, delay)
     }
 
     const measureLoopWidth = () => {
@@ -138,19 +124,6 @@ export default function Gallery() {
 
     const resizeObserver = new ResizeObserver(measureLoopWidth)
     resizeObserver.observe(track)
-
-    const onPointerDown = () => {
-      pointerDownRef.current = true
-      pause()
-    }
-    const onPointerUp = () => {
-      pointerDownRef.current = false
-      scheduleResume()
-    }
-    const onPointerCancel = () => {
-      pointerDownRef.current = false
-      scheduleResume(400)
-    }
     const onVisibilityChange = () => {
       if (document.hidden) {
         pause()
@@ -159,9 +132,6 @@ export default function Gallery() {
       }
     }
 
-    track.addEventListener('pointerdown', onPointerDown)
-    track.addEventListener('pointerup', onPointerUp)
-    track.addEventListener('pointercancel', onPointerCancel)
     document.addEventListener('visibilitychange', onVisibilityChange)
 
     const step = (timestamp: number) => {
@@ -188,11 +158,7 @@ export default function Gallery() {
 
     return () => {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
-      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
       resizeObserver.disconnect()
-      track.removeEventListener('pointerdown', onPointerDown)
-      track.removeEventListener('pointerup', onPointerUp)
-      track.removeEventListener('pointercancel', onPointerCancel)
       document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [])
@@ -206,11 +172,12 @@ export default function Gallery() {
             Cuando se completa el set, hace loop sin corte (track duplicado). */}
         <div
           ref={trackRef}
-          className="flex gap-3 overflow-x-auto overflow-y-hidden h-[460px] md:h-[560px] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-3 overflow-x-auto overflow-y-hidden h-[460px] md:h-[560px] [&::-webkit-scrollbar]:hidden pointer-events-none select-none"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
             WebkitOverflowScrolling: 'touch',
+            touchAction: 'none',
           }}
         >
           {TRACK.map((col, i) => (
