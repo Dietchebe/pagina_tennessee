@@ -7,47 +7,38 @@ export default function Hero() {
       id="inicio"
       className="relative min-h-[92svh] flex items-center justify-center overflow-hidden"
     >
-      {/* Background — reemplazar div por <video> cuando esté listo el archivo */}
       <div className="absolute inset-0">
-        {/*
-          Cuando tengas el video, reemplaza el div de abajo con:
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="media-monochrome w-full h-full object-cover object-center"
+        >
+          <source src="/assets/imagenes/videos/video_intro/v1_intro.mp4" type="video/mp4" />
+        </video>
 
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="/videos/hero.mp4" type="video/mp4" />
-          </video>
-        */}
-        <div className="w-full h-full bg-transparent">
-          {/* Viñeta tenue para no perder legibilidad mientras el halo global queda visible */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(13,13,13,0.14)_58%,rgba(13,13,13,0.34)_100%)]" />
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(13,13,13,0.36)_48%,rgba(13,13,13,0.82)_100%)]" />
       </div>
 
-      {/* Overlay oscuro */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/52 via-black/24 to-black/62" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/74 via-black/52 to-black/86" />
 
       {/* Contenido */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-28 pb-16">
-        <p className="text-brand-amber text-[10px] tracking-[0.5em] uppercase mb-10 font-sans">
-          — Las Condes · Santiago de — Chile · Cantagallo 
-        </p>
-
-        <h1 className="font-serif text-[clamp(2.8rem,8vw,6rem)] text-brand-cream leading-[1.05] mb-8">
+      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-36 pb-16">
+        <h1 className="font-serif text-[clamp(2.8rem,8vw,6rem)] text-brand-cream leading-[1.05] mb-8 -mt-1">
           Tu próxima visita
           <br />
           <em className="text-brand-amber">empieza aquí.</em>
         </h1>
 
-        <p className="text-brand-muted text-base md:text-xl mb-12 max-w-lg mx-auto leading-relaxed">
-          Cortes precisos, asesoría real y reserva online.
-          <br className="hidden sm:block" />
-          Todo pensado para decidir rápido en mobile.
+        <p className="mt-8 text-white text-[10px] tracking-[0.35em] uppercase font-sans">
+          +10000 cortes · 4.9★ Google · Asesoría incluida
         </p>
+
+        <div
+          className="mb-12 mx-auto max-w-lg h-[4.75rem] md:h-[5.75rem]"
+          aria-hidden="true"
+        />
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button href={AGENDAPRO_URL} size="xl">
@@ -60,9 +51,10 @@ export default function Hero() {
 
         <div id="hero-booking-trigger" className="h-px w-px mx-auto mt-6" aria-hidden="true" />
 
-        <p className="mt-8 text-brand-muted/60 text-[10px] tracking-[0.35em] uppercase font-sans">
-          +10000 cortes · 4.9★ Google · Asesoría incluida
+        <p className="mt-20 text-brand-amber text-[10px] tracking-[0.5em] uppercase font-sans">
+          — Av. Nueva Costanera 12255 — Las Condes * Cantagallo
         </p>
+
       </div>
     </section>
   )

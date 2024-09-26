@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { NAV_LINKS } from '@/lib/constants'
 
@@ -21,13 +22,26 @@ export default function Header() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div className="relative max-w-7xl mx-auto px-6 py-5 flex items-center justify-end md:justify-between">
         {/* Logo */}
-        <a href="#inicio" className="flex flex-col leading-none">
-          <span className="font-serif text-brand-cream text-lg tracking-[0.15em]">TENNESSEE</span>
-          <span className="font-sans text-brand-amber text-[7px] tracking-[0.5em] uppercase mt-[2px]">
-            Barber Shop
-          </span>
+        <a
+          href="#inicio"
+          className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center leading-none transition-[top] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            scrolled ? 'top-1/2' : 'top-[66%]'
+          }`}
+        >
+          <Image
+            src="/assets/imagenes/logo_tennessee/logo_nuevo_tennessee.png"
+            alt="Tennessee Barber Shop"
+            width={144}
+            height={144}
+            className={`object-contain transition-[width,height] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              scrolled
+                ? 'h-20 w-20 md:h-24 md:w-24'
+                : 'h-40 w-40 md:h-48 md:w-48'
+            }`}
+            priority
+          />
         </a>
 
         {/* Desktop nav */}
@@ -47,7 +61,7 @@ export default function Header() {
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
+          className="md:hidden flex flex-col gap-[5px] p-2 -mr-2 relative z-10"
           aria-label="Abrir menú"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"

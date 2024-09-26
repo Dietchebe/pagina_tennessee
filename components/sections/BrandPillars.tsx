@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const PILLARS = [
   {
@@ -29,22 +29,22 @@ const PROFILES = [
   {
     name: 'Víctor Castellano',
     role: 'Ceo · Tennessee Barber Shop',
+    videoSrc: '/assets/imagenes/videos/video_testimonios/intro2.mp4',
     slogan:
       '"Tennessee existe para que cada visita termine con un corte preciso, una imagen clara y una experiencia que le represente"',
-    tone: 'from-[#2a1a0a] to-[#1a1a1a]',
   },
   {
     name: 'Ronald',
     role: 'Barbero del equipo Tennessee',
+    videoSrc: '/assets/imagenes/videos/video_testimonios/intro1.mp4',
     slogan:
       '"Ayudo a que cada cliente mantenga un estilo limpio, firme y fácil de llevar día a día"',
-    tone: 'from-[#341d10] to-[#1a1a1a]',
   },
   {
     name: 'Barreto',
     role: 'Barbero del equipo Tennessee',
+    videoSrc: '/assets/imagenes/videos/video_testimonios/intro3.mp4',
     slogan: '“Fade, mullet o low taper… quedas 10/10”',
-    tone: 'from-[#24180f] to-[#1a1a1a]',
   },
 ]
 
@@ -60,6 +60,7 @@ function DividerBand() {
 
 export default function BrandPillars() {
   const [activeProfile, setActiveProfile] = useState(0)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -68,6 +69,27 @@ export default function BrandPillars() {
 
     return () => window.clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    const video = videoRefs.current[activeProfile]
+    if (!video) return
+
+    const seekToTwo = () => {
+      try {
+        video.currentTime = 2
+      } catch {
+        // Ignorar si el navegador todavía no permite seek.
+      }
+    }
+
+    if (video.readyState >= 1) {
+      seekToTwo()
+      return
+    }
+
+    video.addEventListener('loadedmetadata', seekToTwo, { once: true })
+    return () => video.removeEventListener('loadedmetadata', seekToTwo)
+  }, [activeProfile])
 
   const profile = PROFILES[activeProfile]
 
@@ -87,14 +109,23 @@ export default function BrandPillars() {
               </h2>
               <div className="max-w-md mb-6">
                 <div
-                  className={`relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-[#2A1F10] bg-gradient-to-b ${profile.tone} mb-5 transition-all duration-500`}
+                  className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-[#2A1F10] bg-black mb-5 transition-all duration-500"
                 >
-                  <div className="absolute inset-0 flex items-end justify-start p-6">
-                    <div className="opacity-20">
-                      <div className="w-12 h-12 border border-brand-amber rounded-full mb-2" />
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent" />
+                  <video
+                    key={profile.videoSrc}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    ref={(node) => {
+                      videoRefs.current[activeProfile] = node
+                    }}
+                    className="media-monochrome absolute inset-0 h-full w-full object-cover object-center"
+                  >
+                    <source src={profile.videoSrc} type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.26)_54%,rgba(0,0,0,0.82)_100%)]" />
+                  <div className="absolute inset-0 bg-black/30" />
                   <div className="absolute top-5 left-5">
                     <span className="text-brand-amber text-[9px] tracking-[0.35em] uppercase font-sans">
                       {String(activeProfile + 1).padStart(2, '0')} · {PROFILES.length}

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { WHATSAPP_URL } from '@/lib/constants'
 
@@ -70,14 +71,15 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14 text-center md:text-left">
           {/* Brand */}
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <div className="mb-5">
-              <span className="font-serif text-brand-cream text-xl tracking-[0.15em] block">
-                TENNESSEE
-              </span>
-              <span className="font-sans text-brand-amber text-[7px] tracking-[0.5em] uppercase">
-                Barber Shop
-              </span>
+              <Image
+                src="/assets/imagenes/logo_tennessee/logo_nuevo_tennessee.png"
+                alt="Tennessee Barber Shop"
+                width={120}
+                height={120}
+                className="h-24 w-24 md:h-28 md:w-28 object-contain"
+              />
             </div>
             <p className="text-brand-muted text-sm leading-relaxed max-w-xs">
               Cortes, asesoría y estilo de oficio. Para el hombre que cuida cómo se presenta.

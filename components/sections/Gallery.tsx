@@ -1,22 +1,89 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import SectionTitle from '@/components/ui/SectionTitle'
 import SectionDivider from '@/components/ui/SectionDivider'
 
 type Column =
-  | { type: 'tall'; w: string; label: string }
-  | { type: 'stack'; w: string; topLabel: string; bottomLabel: string }
+  | { type: 'tall'; w: string; top: MediaTile }
+  | { type: 'stack'; w: string; top: MediaTile; bottom: MediaTile }
 
-// Cada columna del collage: o foto vertical completa, o dos fotos apiladas.
-// Los ratios y anchos varían para crear el efecto de mosaico de la referencia.
+type MediaTile =
+  | { kind: 'image'; src: string; alt: string }
+  | { kind: 'video'; src: string; alt: string }
+
+// Cada columna del collage: una pieza alta o dos piezas apiladas.
 const COLUMNS: Column[] = [
-  { type: 'tall', w: 'w-[240px] md:w-[280px]', label: '01' },
-  { type: 'stack', w: 'w-[300px] md:w-[360px]', topLabel: '02', bottomLabel: '03' },
-  { type: 'tall', w: 'w-[260px] md:w-[300px]', label: '04' },
-  { type: 'stack', w: 'w-[280px] md:w-[340px]', topLabel: '05', bottomLabel: '06' },
-  { type: 'tall', w: 'w-[280px] md:w-[320px]', label: '07' },
-  { type: 'stack', w: 'w-[260px] md:w-[300px]', topLabel: '08', bottomLabel: '09' },
+  {
+    type: 'tall',
+    w: 'w-[240px] md:w-[280px]',
+    top: {
+      kind: 'video',
+      src: '/assets/imagenes/fotos_clientes_testimonio/video_cliente4.mp4',
+      alt: 'Video cliente 4',
+    },
+  },
+  {
+    type: 'stack',
+    w: 'w-[300px] md:w-[360px]',
+    top: {
+      kind: 'image',
+      src: '/assets/imagenes/fotos_clientes_testimonio/fct1.png',
+      alt: 'Foto cliente testimonio 1',
+    },
+    bottom: {
+      kind: 'video',
+      src: '/assets/imagenes/fotos_clientes_testimonio/video_cliente1.MP4',
+      alt: 'Video cliente 1',
+    },
+  },
+  {
+    type: 'tall',
+    w: 'w-[260px] md:w-[300px]',
+    top: {
+      kind: 'video',
+      src: '/assets/imagenes/fotos_clientes_testimonio/video_cliente3.mp4',
+      alt: 'Video cliente 3',
+    },
+  },
+  {
+    type: 'stack',
+    w: 'w-[280px] md:w-[340px]',
+    top: {
+      kind: 'video',
+      src: '/assets/imagenes/fotos_clientes_testimonio/video_cliente2.mp4',
+      alt: 'Video cliente 2',
+    },
+    bottom: {
+      kind: 'image',
+      src: '/assets/imagenes/fotos_clientes_testimonio/fct2.png',
+      alt: 'Foto cliente testimonio 2',
+    },
+  },
+  {
+    type: 'tall',
+    w: 'w-[280px] md:w-[320px]',
+    top: {
+      kind: 'image',
+      src: '/assets/imagenes/fotos_clientes_testimonio/fct3.png',
+      alt: 'Foto cliente testimonio 3',
+    },
+  },
+  {
+    type: 'stack',
+    w: 'w-[260px] md:w-[300px]',
+    top: {
+      kind: 'image',
+      src: '/assets/imagenes/fotos_clientes_testimonio/fct4.png',
+      alt: 'Foto cliente testimonio 4',
+    },
+    bottom: {
+      kind: 'image',
+      src: '/assets/imagenes/fotos_clientes_testimonio/fct5.png',
+      alt: 'Foto cliente testimonio 5',
+    },
+  },
 ]
 
 // Duplicado para loop infinito sin saltos visibles.
@@ -108,11 +175,11 @@ export default function Gallery() {
           {TRACK.map((col, i) => (
             <div key={i} className={`${col.w} flex flex-col gap-3 shrink-0`}>
               {col.type === 'tall' ? (
-                <PhotoTile label={col.label} />
+                <MediaTile item={col.top} />
               ) : (
                 <>
-                  <PhotoTile label={col.topLabel} />
-                  <PhotoTile label={col.bottomLabel} />
+                  <MediaTile item={col.top} />
+                  <MediaTile item={col.bottom} />
                 </>
               )}
             </div>
@@ -127,12 +194,23 @@ export default function Gallery() {
   )
 }
 
-function PhotoTile({ label }: { label: string }) {
+function MediaTile({ item }: { item: MediaTile }) {
   return (
-    <div className="flex-1 min-h-0 bg-[radial-gradient(circle_at_top,#2a2a2a_0%,#161616_70%)] border border-[#333333] rounded-lg flex items-end p-4 overflow-hidden">
-      <p className="font-sans text-[9px] tracking-[0.35em] uppercase text-brand-muted/60">
-        Foto {label}
-      </p>
+    <div className="relative flex-1 min-h-0 bg-[radial-gradient(circle_at_top,#2a2a2a_0%,#161616_70%)] border border-[#333333] rounded-lg overflow-hidden">
+      {item.kind === 'image' ? (
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          sizes="(min-width: 1024px) 20vw, 45vw"
+          className="media-monochrome object-cover object-center"
+        />
+      ) : (
+        <video autoPlay muted loop playsInline className="media-monochrome w-full h-full object-cover object-center">
+          <source src={item.src} type="video/mp4" />
+        </video>
+      )}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.05)_0%,rgba(0,0,0,0.18)_100%)]" />
     </div>
   )
 }
