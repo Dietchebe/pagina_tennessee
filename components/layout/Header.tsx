@@ -31,7 +31,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#0D0D0D]/96 backdrop-blur-md border-b border-[#333333]'
+          ? 'bg-[#0D0D0D]/96 backdrop-blur-md md:border-b md:border-[#333333]'
           : 'bg-transparent'
       }`}
     >
@@ -40,7 +40,7 @@ export default function Header() {
         <a
           href="#inicio"
           className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center leading-none transition-[top] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            scrolled ? 'top-1/2' : 'top-[66%]'
+            scrolled ? 'top-[46%] md:top-1/2' : 'top-[64%] md:top-[66%]'
           }`}
         >
           <Image
@@ -51,7 +51,7 @@ export default function Header() {
             className={`object-contain transition-[width,height] duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
               scrolled
                 ? 'h-20 w-20 md:h-24 md:w-24'
-                : 'h-40 w-40 md:h-48 md:w-48'
+                : 'h-36 w-36 md:h-48 md:w-48'
             }`}
             priority
           />
