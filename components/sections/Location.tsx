@@ -85,26 +85,20 @@ export default function Location() {
             <div className="relative z-10 h-full min-h-[240px] md:min-h-[360px] flex flex-col justify-between p-5 md:p-8">
               <div className="flex flex-col gap-3 md:gap-4 justify-end h-full">
                 <div className="pt-3 md:pt-4 border-t border-white/10 mt-auto">
-                  <div className="flex flex-col gap-3">
-                    <p className="text-brand-muted text-sm md:text-base leading-relaxed max-w-sm">
-                      Nueva Costanera 12255, Cantagallo local 36.
-                    </p>
-
-                    <div className="inline-flex items-center gap-3 self-start border border-[#333333] bg-[#111111]/80 px-4 py-3 transition-colors group-hover:border-brand-amber/40 group-hover:bg-[#151515]">
-                      <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-brand-amber/10 text-brand-amber">
-                        <svg viewBox="0 0 24 24" aria-hidden="true" className="w-5 h-5">
-                          <path
-                            d="M12 2.5c-3.3 0-6 2.6-6 5.8 0 4.4 6 13.2 6 13.2s6-8.8 6-13.2c0-3.2-2.7-5.8-6-5.8Zm0 8.6a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </span>
-                      <div>
-                        <p className="text-brand-cream text-sm font-medium">Abrir en Maps</p>
-                        <p className="text-brand-muted/70 text-[10px] uppercase tracking-[0.25em]">
-                          Google Maps
-                        </p>
-                      </div>
+                  <div className="inline-flex items-center gap-3 self-start border border-[#333333] bg-[#111111]/80 px-4 py-3 transition-colors group-hover:border-brand-amber/40 group-hover:bg-[#151515]">
+                    <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-brand-amber/10 text-brand-amber">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" className="w-5 h-5">
+                        <path
+                          d="M12 2.5c-3.3 0-6 2.6-6 5.8 0 4.4 6 13.2 6 13.2s6-8.8 6-13.2c0-3.2-2.7-5.8-6-5.8Zm0 8.6a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="text-brand-cream text-sm font-medium">Abrir en Maps</p>
+                      <p className="text-brand-muted/70 text-[10px] uppercase tracking-[0.25em]">
+                        Google Maps
+                      </p>
                     </div>
                   </div>
                 </div>

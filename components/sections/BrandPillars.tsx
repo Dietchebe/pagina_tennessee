@@ -53,13 +53,7 @@ const PROFILES = [
 ]
 
 function DividerBand() {
-  return (
-    <div className="px-6">
-      <div className="relative h-16 md:h-20">
-        <div className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 mx-auto max-w-4xl h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
-      </div>
-    </div>
-  )
+  return <SectionDivider />
 }
 
 export default function BrandPillars() {

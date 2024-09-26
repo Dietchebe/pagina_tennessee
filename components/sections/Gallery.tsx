@@ -107,7 +107,7 @@ export default function Gallery() {
     ).matches
     if (prefersReducedMotion) return
 
-    const speed = 32 // px/segundo
+    const speed = window.matchMedia('(min-width: 1024px)').matches ? 46 : 32
 
     const pause = () => {
       pausedRef.current = true
@@ -151,10 +151,6 @@ export default function Gallery() {
       pointerDownRef.current = false
       scheduleResume(400)
     }
-    const onWheel = () => {
-      pause()
-      scheduleResume(800)
-    }
     const onVisibilityChange = () => {
       if (document.hidden) {
         pause()
@@ -166,7 +162,6 @@ export default function Gallery() {
     track.addEventListener('pointerdown', onPointerDown)
     track.addEventListener('pointerup', onPointerUp)
     track.addEventListener('pointercancel', onPointerCancel)
-    track.addEventListener('wheel', onWheel, { passive: true })
     document.addEventListener('visibilitychange', onVisibilityChange)
 
     const step = (timestamp: number) => {
@@ -198,7 +193,6 @@ export default function Gallery() {
       track.removeEventListener('pointerdown', onPointerDown)
       track.removeEventListener('pointerup', onPointerUp)
       track.removeEventListener('pointercancel', onPointerCancel)
-      track.removeEventListener('wheel', onWheel)
       document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [])
