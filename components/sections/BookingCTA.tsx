@@ -1,10 +1,10 @@
 import Button from '@/components/ui/Button'
+import SectionDivider from '@/components/ui/SectionDivider'
 import { WHATSAPP_URL } from '@/lib/constants'
 
 export default function BookingCTA() {
   return (
-    <section className="relative bg-transparent py-20 md:py-24 px-6 overflow-hidden">
-      <div aria-hidden="true" className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
+    <section className="relative bg-transparent py-8 md:py-24 px-6 overflow-hidden">
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="text-brand-amber text-[10px] tracking-[0.5em] uppercase mb-10 font-sans">
           — ¿Aún no estás convencido? —
@@ -27,6 +27,9 @@ export default function BookingCTA() {
         <p className="text-brand-muted/30 text-[10px] font-sans tracking-[0.35em] uppercase mt-10">
           Tennessee Barber Shop · Las Condes, Santiago
         </p>
+      </div>
+      <div className="pt-5 md:pt-6">
+        <SectionDivider />
       </div>
     </section>
   )

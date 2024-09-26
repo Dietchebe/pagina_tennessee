@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import SectionDivider from '@/components/ui/SectionDivider'
 
 const PILLARS = [
   {
@@ -30,6 +31,7 @@ const PROFILES = [
     name: 'Víctor Castellano',
     role: 'Ceo · Tennessee Barber Shop',
     videoSrc: '/assets/imagenes/videos/video_testimonios/intro2.mp4',
+    startTime: 8,
     slogan:
       '"Tennessee existe para que cada visita termine con un corte preciso, una imagen clara y una experiencia que le represente"',
   },
@@ -37,6 +39,7 @@ const PROFILES = [
     name: 'Ronald',
     role: 'Barbero del equipo Tennessee',
     videoSrc: '/assets/imagenes/videos/video_testimonios/intro1.mp4',
+    startTime: 6,
     slogan:
       '"Ayudo a que cada cliente mantenga un estilo limpio, firme y fácil de llevar día a día"',
   },
@@ -44,6 +47,7 @@ const PROFILES = [
     name: 'Barreto',
     role: 'Barbero del equipo Tennessee',
     videoSrc: '/assets/imagenes/videos/video_testimonios/intro3.mp4',
+    startTime: 6,
     slogan: '“Fade, mullet o low taper… quedas 10/10”',
   },
 ]
@@ -74,21 +78,21 @@ export default function BrandPillars() {
     const video = videoRefs.current[activeProfile]
     if (!video) return
 
-    const seekToTwo = () => {
+    const seekToSix = () => {
       try {
-        video.currentTime = 2
+        video.currentTime = profile.startTime
       } catch {
         // Ignorar si el navegador todavía no permite seek.
       }
     }
 
     if (video.readyState >= 1) {
-      seekToTwo()
+      seekToSix()
       return
     }
 
-    video.addEventListener('loadedmetadata', seekToTwo, { once: true })
-    return () => video.removeEventListener('loadedmetadata', seekToTwo)
+    video.addEventListener('loadedmetadata', seekToSix, { once: true })
+    return () => video.removeEventListener('loadedmetadata', seekToSix)
   }, [activeProfile])
 
   const profile = PROFILES[activeProfile]
@@ -96,18 +100,18 @@ export default function BrandPillars() {
   return (
     <section id="nosotros" className="relative bg-transparent">
       <div className="max-w-7xl mx-auto">
-        <div className="px-6 pt-1 pb-8 md:pt-8 md:pb-10">
-          <div className="max-w-3xl mx-auto lg:mx-0">
+        <div className="px-6 pt-10 pb-8 md:pt-12 md:pb-10">
+          <div className="max-w-3xl mx-auto">
             <div className="lg:sticky lg:top-32">
-              <p className="text-brand-amber text-[10px] tracking-[0.35em] uppercase mb-5 font-sans text-center lg:text-left">
+              <p className="text-brand-amber text-[10px] tracking-[0.35em] uppercase mb-5 font-sans text-center">
                 — Nosotros —
               </p>
-              <h2 className="font-serif text-4xl md:text-5xl text-brand-cream leading-tight mb-5 text-center lg:text-left">
+              <h2 className="font-serif text-4xl md:text-5xl text-brand-cream leading-tight mb-5 text-center">
                 No solo cortamos.
                 <br />
                 <em className="text-brand-amber">Asesoramos.</em>
               </h2>
-              <div className="max-w-md mb-6">
+              <div className="max-w-md mx-auto mb-6">
                 <div
                   className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-[#2A1F10] bg-black mb-5 transition-all duration-500"
                 >
@@ -141,7 +145,7 @@ export default function BrandPillars() {
                   </div>
                 </div>
 
-                <div className="min-h-[7rem] md:min-h-[6rem]">
+                <div className="min-h-[7rem] md:min-h-[6rem] text-center">
                   <p className="text-brand-muted text-base md:text-lg leading-relaxed">
                     {profile.slogan}
                   </p>
@@ -150,7 +154,7 @@ export default function BrandPillars() {
             </div>
           </div>
 
-          <div className="mx-auto max-w-4xl h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent mt-10 md:mt-12" />
+          <DividerBand />
         </div>
 
         <div className="px-6 pt-10 pb-14 md:pt-12 md:pb-20">
@@ -180,7 +184,7 @@ export default function BrandPillars() {
             </div>
           </div>
         </div>
-
+        <SectionDivider />
       </div>
     </section>
   )

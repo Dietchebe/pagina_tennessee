@@ -7,11 +7,24 @@ import { NAV_LINKS } from '@/lib/constants'
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setDesktopMenuOpen(false)
+        setMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
 
   return (
@@ -22,7 +35,7 @@ export default function Header() {
           : 'bg-transparent'
       }`}
     >
-      <div className="relative max-w-7xl mx-auto px-6 py-5 flex items-center justify-end md:justify-between">
+      <div className="relative max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#inicio"
@@ -44,18 +57,46 @@ export default function Header() {
           />
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-10">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-sans text-[10px] text-brand-muted hover:text-brand-cream tracking-[0.25em] uppercase transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        {/* Desktop menu */}
+        <div className="relative hidden md:block">
+          <button
+            type="button"
+            onClick={() => setDesktopMenuOpen((open) => !open)}
+            className={`flex items-center gap-3 rounded-full border px-5 py-3 font-sans text-[10px] tracking-[0.28em] uppercase transition-colors duration-200 ${
+              desktopMenuOpen || scrolled
+                ? 'border-[#444444] bg-[#111111]/90 text-brand-cream hover:border-brand-amber/60'
+                : 'border-white/15 bg-black/10 text-brand-muted hover:text-brand-cream hover:border-white/30'
+            }`}
+            aria-expanded={desktopMenuOpen}
+            aria-controls="desktop-menu"
+            aria-label="Abrir menú de navegación"
+          >
+            <span>Menú</span>
+            <span className="text-[11px] leading-none">{desktopMenuOpen ? '▴' : '▾'}</span>
+          </button>
+
+          <div
+            id="desktop-menu"
+            className={`absolute right-0 top-[calc(100%+0.75rem)] w-64 overflow-hidden rounded-2xl border border-[#333333] bg-[#0D0D0D]/98 shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-md transition-all duration-300 ${
+              desktopMenuOpen
+                ? 'visible translate-y-0 opacity-100'
+                : 'pointer-events-none invisible -translate-y-2 opacity-0'
+            }`}
+          >
+            <nav className="flex flex-col p-3">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setDesktopMenuOpen(false)}
+                  className="rounded-xl px-4 py-3 font-sans text-[10px] text-brand-muted tracking-[0.25em] uppercase transition-colors hover:bg-white/5 hover:text-brand-cream"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
 
         {/* Mobile hamburger */}
         <button

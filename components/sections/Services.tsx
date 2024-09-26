@@ -22,7 +22,6 @@ export default function Services() {
 
   return (
     <section id="servicios" className="relative bg-transparent py-12 md:py-16 px-6">
-      <SectionDivider />
       <div className="max-w-3xl mx-auto">
         <SectionTitle
           eyebrow="Servicios"
@@ -86,7 +85,7 @@ export default function Services() {
             </div>
           ))}
         </div>
-
+        <SectionDivider />
       </div>
     </section>
   )

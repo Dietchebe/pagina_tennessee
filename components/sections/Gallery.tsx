@@ -91,6 +91,12 @@ const TRACK = [...COLUMNS, ...COLUMNS]
 
 export default function Gallery() {
   const trackRef = useRef<HTMLDivElement | null>(null)
+  const rafRef = useRef<number | null>(null)
+  const loopWidthRef = useRef(0)
+  const pausedRef = useRef(false)
+  const pointerDownRef = useRef(false)
+  const lastTimestampRef = useRef(0)
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const track = trackRef.current
@@ -99,69 +105,106 @@ export default function Gallery() {
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches
-    const isMobile = window.matchMedia('(max-width: 767px)').matches
-    if (prefersReducedMotion || !isMobile) return
+    if (prefersReducedMotion) return
 
-    let rafId = 0
-    let isPaused = false
-    let resumeTimeout: ReturnType<typeof setTimeout> | null = null
-    const speed = 0.55 // px por frame ≈ 33 px/s, deslizamiento lento pero visible
-
-    const step = () => {
-      if (!isPaused) {
-        track.scrollLeft += speed
-        const halfWidth = track.scrollWidth / 2
-        if (track.scrollLeft >= halfWidth) {
-          track.scrollLeft -= halfWidth
-        }
-      }
-      rafId = requestAnimationFrame(step)
-    }
+    const speed = 32 // px/segundo
 
     const pause = () => {
-      isPaused = true
-      if (resumeTimeout) {
-        clearTimeout(resumeTimeout)
-        resumeTimeout = null
+      pausedRef.current = true
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current)
+        resumeTimeoutRef.current = null
       }
     }
 
-    const scheduleResume = () => {
-      if (resumeTimeout) clearTimeout(resumeTimeout)
-      resumeTimeout = setTimeout(() => {
-        isPaused = false
-      }, 1500)
+    const resume = () => {
+      pausedRef.current = false
+      lastTimestampRef.current = 0
     }
 
-    const onMouseEnter = () => pause()
-    const onMouseLeave = () => {
-      isPaused = false
+    const scheduleResume = (delay = 1200) => {
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+      resumeTimeoutRef.current = setTimeout(() => {
+        pointerDownRef.current = false
+        resume()
+      }, delay)
     }
-    const onTouchStart = () => pause()
-    const onTouchEnd = () => scheduleResume()
 
-    track.addEventListener('mouseenter', onMouseEnter)
-    track.addEventListener('mouseleave', onMouseLeave)
-    track.addEventListener('touchstart', onTouchStart, { passive: true })
-    track.addEventListener('touchend', onTouchEnd, { passive: true })
-    track.addEventListener('touchcancel', onTouchEnd, { passive: true })
+    const measureLoopWidth = () => {
+      loopWidthRef.current = track.scrollWidth / 2
+    }
 
-    rafId = requestAnimationFrame(step)
+    measureLoopWidth()
+
+    const resizeObserver = new ResizeObserver(measureLoopWidth)
+    resizeObserver.observe(track)
+
+    const onPointerDown = () => {
+      pointerDownRef.current = true
+      pause()
+    }
+    const onPointerUp = () => {
+      pointerDownRef.current = false
+      scheduleResume()
+    }
+    const onPointerCancel = () => {
+      pointerDownRef.current = false
+      scheduleResume(400)
+    }
+    const onWheel = () => {
+      pause()
+      scheduleResume(800)
+    }
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        pause()
+      } else {
+        resume()
+      }
+    }
+
+    track.addEventListener('pointerdown', onPointerDown)
+    track.addEventListener('pointerup', onPointerUp)
+    track.addEventListener('pointercancel', onPointerCancel)
+    track.addEventListener('wheel', onWheel, { passive: true })
+    document.addEventListener('visibilitychange', onVisibilityChange)
+
+    const step = (timestamp: number) => {
+      if (!lastTimestampRef.current) lastTimestampRef.current = timestamp
+
+      const loopWidth = loopWidthRef.current
+      const deltaSeconds = (timestamp - lastTimestampRef.current) / 1000
+      lastTimestampRef.current = timestamp
+
+      if (!pausedRef.current && !document.hidden && loopWidth > 0) {
+        let nextScrollLeft = track.scrollLeft + speed * deltaSeconds
+
+        if (nextScrollLeft >= loopWidth) {
+          nextScrollLeft -= loopWidth
+        }
+
+        track.scrollLeft = nextScrollLeft
+      }
+
+      rafRef.current = requestAnimationFrame(step)
+    }
+
+    rafRef.current = requestAnimationFrame(step)
 
     return () => {
-      cancelAnimationFrame(rafId)
-      if (resumeTimeout) clearTimeout(resumeTimeout)
-      track.removeEventListener('mouseenter', onMouseEnter)
-      track.removeEventListener('mouseleave', onMouseLeave)
-      track.removeEventListener('touchstart', onTouchStart)
-      track.removeEventListener('touchend', onTouchEnd)
-      track.removeEventListener('touchcancel', onTouchEnd)
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current)
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current)
+      resizeObserver.disconnect()
+      track.removeEventListener('pointerdown', onPointerDown)
+      track.removeEventListener('pointerup', onPointerUp)
+      track.removeEventListener('pointercancel', onPointerCancel)
+      track.removeEventListener('wheel', onWheel)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
     }
   }, [])
 
   return (
     <section id="galeria" className="relative bg-transparent pt-24 md:pt-32 px-6">
-      <SectionDivider />
       <div className="max-w-7xl mx-auto">
         <SectionTitle eyebrow="Galería" title="Nuestro trabajo" />
 
@@ -170,7 +213,11 @@ export default function Gallery() {
         <div
           ref={trackRef}
           className="flex gap-3 overflow-x-auto overflow-y-hidden h-[460px] md:h-[560px] [&::-webkit-scrollbar]:hidden"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch',
+          }}
         >
           {TRACK.map((col, i) => (
             <div key={i} className={`${col.w} flex flex-col gap-3 shrink-0`}>
@@ -185,9 +232,8 @@ export default function Gallery() {
             </div>
           ))}
         </div>
-
-        <div className="relative h-40 md:h-60">
-          <div className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 mx-auto max-w-4xl h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
+        <div className="pt-10 md:pt-12">
+          <SectionDivider />
         </div>
       </div>
     </section>

@@ -67,21 +67,20 @@ const SOCIAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="relative bg-transparent">
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-amber/30 to-transparent" />
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-14 mb-14 text-center md:text-left">
           {/* Brand */}
-          <div className="flex flex-col items-center md:items-start">
-            <div className="mb-5">
+          <div className="flex flex-col items-center text-center md:justify-self-center md:items-center md:text-center max-w-xs mx-auto">
+            <div className="mb-6">
               <Image
                 src="/assets/imagenes/logo_tennessee/logo_nuevo_tennessee.png"
                 alt="Tennessee Barber Shop"
-                width={120}
-                height={120}
-                className="h-24 w-24 md:h-28 md:w-28 object-contain"
+                width={140}
+                height={140}
+                className="h-28 w-28 md:h-32 md:w-32 object-contain mx-auto"
               />
             </div>
-            <p className="text-brand-muted text-sm leading-relaxed max-w-xs">
+            <p className="text-brand-muted text-sm leading-relaxed">
               Cortes, asesoría y estilo de oficio. Para el hombre que cuida cómo se presenta.
             </p>
             <p className="text-brand-muted/40 text-[10px] tracking-[0.3em] uppercase font-sans mt-8">
@@ -121,11 +120,11 @@ export default function Footer() {
           </div>
 
           {/* Contacto / Trabajo */}
-          <div id="contacto" className="md:mx-auto text-center">
+          <div id="contacto" className="md:justify-self-start text-center md:text-left">
             <h4 className="text-brand-cream font-sans text-[10px] tracking-[0.3em] uppercase mb-6">
               Contacto
             </h4>
-            <div className="flex flex-col items-center gap-4 text-sm text-brand-muted mb-10">
+            <div className="flex flex-col items-center md:items-start gap-4 text-sm text-brand-muted mb-10">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
