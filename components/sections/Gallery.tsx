@@ -95,6 +95,7 @@ export default function Gallery() {
   const loopWidthRef = useRef(0)
   const pausedRef = useRef(false)
   const lastTimestampRef = useRef(0)
+  const offsetRef = useRef(0)
 
   useEffect(() => {
     const track = trackRef.current
@@ -117,7 +118,15 @@ export default function Gallery() {
     }
 
     const measureLoopWidth = () => {
-      loopWidthRef.current = track.scrollWidth / 2
+      const halfIndex = Math.floor(track.children.length / 2)
+      const halfTrack = track.children[halfIndex] as HTMLElement | undefined
+
+      loopWidthRef.current = halfTrack?.offsetLeft ?? track.scrollWidth / 2
+
+      if (loopWidthRef.current > 0) {
+        offsetRef.current = offsetRef.current % loopWidthRef.current
+        track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`
+      }
     }
 
     measureLoopWidth()
@@ -142,13 +151,14 @@ export default function Gallery() {
       lastTimestampRef.current = timestamp
 
       if (!pausedRef.current && !document.hidden && loopWidth > 0) {
-        let nextScrollLeft = track.scrollLeft + speed * deltaSeconds
+        let nextOffset = offsetRef.current + speed * deltaSeconds
 
-        if (nextScrollLeft >= loopWidth) {
-          nextScrollLeft -= loopWidth
+        if (nextOffset >= loopWidth) {
+          nextOffset -= loopWidth
         }
 
-        track.scrollLeft = nextScrollLeft
+        offsetRef.current = nextOffset
+        track.style.transform = `translate3d(${-nextOffset}px, 0, 0)`
       }
 
       rafRef.current = requestAnimationFrame(step)
@@ -171,12 +181,12 @@ export default function Gallery() {
         {/* Collage horizontal con auto-deslizamiento + swipe manual.
             Cuando se completa el set, hace loop sin corte (track duplicado). */}
         <div
-          ref={trackRef}
-          className="flex gap-3 overflow-x-auto overflow-y-hidden h-[460px] md:h-[560px] [&::-webkit-scrollbar]:hidden pointer-events-none select-none"
+        ref={trackRef}
+          className="flex w-max gap-3 overflow-hidden h-[460px] md:h-[560px] pointer-events-none select-none will-change-transform"
           style={{
+            transform: 'translate3d(0, 0, 0)',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none',
-            WebkitOverflowScrolling: 'touch',
             touchAction: 'none',
           }}
         >
