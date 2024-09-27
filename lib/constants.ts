@@ -6,23 +6,23 @@ export const SERVICES = {
   cortes: [
     {
       name: 'Corte Degradado',
-      price: 18000,
-      promoPrice: 14390,
+      price: 19000,
+      promoPrice: 15200,
       promoLabel: 'Primera vez',
     },
     {
       name: 'Corte Clásico',
-      price: 16000,
+      price: 17900,
     },
     {
       name: 'Corte con Barba',
-      price: 25000,
-      promoPrice: 19990,
+      price: 26900,
+      promoPrice: 21520,
       promoLabel: 'Primera vez',
     },
   ],
   barba: [
-    { name: 'Barba Spa', price: 16000 },
+    { name: 'Barba Spa', price: 17900 },
     { name: 'Afeitado al ras con toallas calientes', price: 16000 },
     { name: 'Depilación orejas y nariz', price: 12000 },
     { name: 'Depilación cejas', price: 6000 },
