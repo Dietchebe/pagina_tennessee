@@ -6,8 +6,8 @@ export const SERVICES = {
   cortes: [
     {
       name: 'Corte Degradado',
-      price: 19000,
-      promoPrice: 15200,
+      price: 19900,
+      promoPrice: 15920,
       promoLabel: 'Primera vez',
     },
     {
