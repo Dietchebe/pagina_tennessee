@@ -43,7 +43,7 @@ export const STATS = [
 
 export const PROMOTIONS = [
   '20% de descuento en tu primera visita en corte degradado o corte con barba',
-  'Martes y miércoles: 20% descuento en todos los cortes',
+  'Martes y miércoles: 20% descuento en todos los cortes para Uandes, U. Andrés Bello, Tabancura y Oasis Fitness',
   'Perfilado de cejas gratis los martes y miércoles al agendar servicio',
   'Trae un amigo: uno obtiene 50% de descuento en un servicio adicional',
 ]
