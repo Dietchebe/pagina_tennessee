@@ -66,6 +66,11 @@ export default function Services() {
                 <h3 className="font-serif text-brand-cream text-lg mb-1.5">
                   {service.name}
                 </h3>
+                {service.promoLabel ? (
+                  <span className="inline-block font-sans text-[9px] text-brand-amber/80 tracking-[0.25em] uppercase border border-brand-amber/25 px-2 py-[3px]">
+                    {service.promoLabel}
+                  </span>
+                ) : null}
               </div>
               <div className="text-right shrink-0">
                 {typeof service.promoPrice === 'number' ? (
