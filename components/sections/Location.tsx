@@ -34,7 +34,7 @@ export default function Location() {
       <div className="max-w-7xl mx-auto">
         <SectionTitle
           eyebrow="Ubicación"
-          title="Estamos en Nueva Costanera 12255"
+          title="Estamos en Nueva Las Condes 12255"
           subtitle="Cantagallo, local 36, 2do piso"
         />
 
