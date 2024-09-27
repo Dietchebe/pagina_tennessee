@@ -7,8 +7,6 @@ export const SERVICES = {
     {
       name: 'Corte Degradado',
       price: 19900,
-      promoPrice: 15920,
-      promoLabel: 'Primera vez',
     },
     {
       name: 'Corte Clásico',
@@ -17,8 +15,6 @@ export const SERVICES = {
     {
       name: 'Corte con Barba',
       price: 26900,
-      promoPrice: 21520,
-      promoLabel: 'Primera vez',
     },
   ],
   barba: [

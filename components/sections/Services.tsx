@@ -6,6 +6,15 @@ import SectionDivider from '@/components/ui/SectionDivider'
 import { SERVICES } from '@/lib/constants'
 
 type Tab = keyof typeof SERVICES
+type ServiceItem = {
+  name: string
+  price: number
+  promoPrice?: number
+  promoLabel?: string
+  isFrom?: boolean
+}
+
+const serviceGroups = SERVICES as Record<Tab, ServiceItem[]>
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'cortes', label: 'Cortes' },
@@ -48,7 +57,7 @@ export default function Services() {
 
         {/* Lista de servicios */}
         <div className="divide-y divide-[#333333] mb-8">
-          {SERVICES[active].map((service) => (
+          {serviceGroups[active].map((service) => (
             <div
               key={service.name}
               className="py-6 flex items-start justify-between gap-6"
@@ -57,14 +66,9 @@ export default function Services() {
                 <h3 className="font-serif text-brand-cream text-lg mb-1.5">
                   {service.name}
                 </h3>
-                {'promoLabel' in service && service.promoLabel && (
-                  <span className="inline-block font-sans text-[9px] text-brand-amber/80 tracking-[0.25em] uppercase border border-brand-amber/25 px-2 py-[3px]">
-                    {service.promoLabel}
-                  </span>
-                )}
               </div>
               <div className="text-right shrink-0">
-                {'promoPrice' in service && service.promoPrice ? (
+                {typeof service.promoPrice === 'number' ? (
                   <>
                     <p className="font-sans text-brand-muted/60 text-xs line-through mb-0.5">
                       {formatPrice(service.price)}
