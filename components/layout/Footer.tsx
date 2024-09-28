@@ -94,7 +94,7 @@ export default function Footer() {
               Ubicación
             </h4>
             <div className="flex flex-col gap-3 text-sm text-brand-muted mb-8">
-              <p>Nueva Costanera 12255</p>
+              <p>Nueva Las Condes 12255</p>
               <p>Cantagallo, local 36</p>
               <a
                 href="https://www.google.com/maps/place/Tennessee+Barbershop/@-33.3738227,-70.5205687,17z/data=!3m1!4b1!4m6!3m5!1s0x9662cbfbbb73da77:0xb5a3a9f83a4f8e1f!8m2!3d-33.3738227!4d-70.5179938!16s%2Fg%2F11hdcc1ncl?entry=ttu&g_ep=EgoyMDI2MDQyOC4wIKXMDSoASAFQAw%3D%3D"
