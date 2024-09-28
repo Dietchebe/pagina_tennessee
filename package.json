@@ -6,10 +6,10 @@
     "node": ">=20.9.0 <25"
   },
   "scripts": {
-    "dev": "fnm exec --using .nvmrc -- sh -c 'node scripts/assert-project-root.mjs && next dev'",
-    "doctor": "fnm exec --using .nvmrc -- node scripts/doctor.mjs",
-    "build": "fnm exec --using .nvmrc -- next build",
-    "start": "fnm exec --using .nvmrc -- next start",
+    "dev": "node scripts/assert-project-root.mjs && next dev",
+    "doctor": "node scripts/doctor.mjs",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
