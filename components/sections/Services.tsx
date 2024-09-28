@@ -12,6 +12,7 @@ type ServiceItem = {
   promoPrice?: number
   promoLabel?: string
   isFrom?: boolean
+  priceNote?: string
 }
 
 const serviceGroups = SERVICES as Record<Tab, ServiceItem[]>
@@ -66,10 +67,10 @@ export default function Services() {
                 <h3 className="font-serif text-brand-cream text-lg mb-1.5">
                   {service.name}
                 </h3>
-                {service.promoLabel ? (
-                  <span className="inline-block font-sans text-[9px] text-brand-amber/80 tracking-[0.25em] uppercase border border-brand-amber/25 px-2 py-[3px]">
-                    {service.promoLabel}
-                  </span>
+                {service.priceNote ? (
+                  <p className="max-w-[18rem] font-sans text-[11px] leading-snug text-brand-muted">
+                    {service.priceNote}
+                  </p>
                 ) : null}
               </div>
               <div className="text-right shrink-0">
@@ -85,7 +86,9 @@ export default function Services() {
                 ) : (
                   <p className="font-serif text-brand-amber text-2xl leading-none">
                     {'isFrom' in service && service.isFrom ? (
-                      <span className="text-brand-muted/60 text-sm font-sans mr-1">Desde</span>
+                      <span className="block text-[10px] uppercase tracking-[0.24em] text-brand-muted mb-1">
+                        Desde
+                      </span>
                     ) : null}
                     {formatPrice(service.price)}
                   </p>

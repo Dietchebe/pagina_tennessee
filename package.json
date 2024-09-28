@@ -2,10 +2,14 @@
   "name": "tennessee",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.9.0 <25"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "fnm exec --using .nvmrc -- sh -c 'node scripts/assert-project-root.mjs && next dev'",
+    "doctor": "fnm exec --using .nvmrc -- node scripts/doctor.mjs",
+    "build": "fnm exec --using .nvmrc -- next build",
+    "start": "fnm exec --using .nvmrc -- next start",
     "lint": "eslint"
   },
   "dependencies": {

@@ -4,24 +4,9 @@ export const WHATSAPP_URL = 'https://wa.me/56956182885'
 
 export const SERVICES = {
   cortes: [
-    {
-      name: 'Corte Degradado',
-      price: 19900,
-      promoPrice: 15920,
-      promoLabel: 'Primera vez',
-    },
-    {
-      name: 'Corte Clásico',
-      price: 17900,
-      promoPrice: 14320,
-      promoLabel: 'Primera vez',
-    },
-    {
-      name: 'Corte con Barba',
-      price: 26900,
-      promoPrice: 21520,
-      promoLabel: 'Primera vez',
-    },
+    { name: 'Corte Degradado', price: 19900 },
+    { name: 'Corte Clásico', price: 17900 },
+    { name: 'Corte con Barba', price: 26900 },
   ],
   barba: [
     { name: 'Barba Spa', price: 17900 },
@@ -30,11 +15,36 @@ export const SERVICES = {
     { name: 'Depilación cejas', price: 6000 },
   ],
   especialidades: [
-    { name: 'Ondulación permanente con corte incluido', price: 80000, isFrom: false },
-    { name: 'Alisado', price: 40000, isFrom: true },
-    { name: 'Decoloración y color fantasía', price: 100000, isFrom: true },
+    {
+      name: 'Ondulación permanente con corte incluido',
+      price: 80000,
+      isFrom: true,
+      priceNote: 'Precio desde, basado en previa evaluación',
+    },
+    {
+      name: 'Alisado',
+      price: 80000,
+      isFrom: true,
+      priceNote: 'Precio desde, basado en previa evaluación',
+    },
+    {
+      name: 'Decoloración y color fantasía',
+      price: 100000,
+      isFrom: true,
+      priceNote: 'Precio desde, basado en previa evaluación',
+    },
   ],
-} satisfies Record<string, { name: string; price: number; promoPrice?: number; promoLabel?: string; isFrom?: boolean }[]>
+} satisfies Record<
+  string,
+  {
+    name: string
+    price: number
+    promoPrice?: number
+    promoLabel?: string
+    isFrom?: boolean
+    priceNote?: string
+  }[]
+>
 
 export const STATS = [
   { value: '500+', label: 'Cortes realizados' },
@@ -44,8 +54,8 @@ export const STATS = [
 ]
 
 export const PROMOTIONS = [
-  '20% de descuento en tu primera visita en corte degradado o corte con barba',
-  'Martes y miércoles: 20% descuento en todos los cortes para Uandes, U. Andrés Bello, Tabancura y Oasis Fitness',
+  'Ofertas exclusivas por temporada: consulta en el local, sujetas a disponibilidad',
+  'Martes y miércoles: 20% de descuento en todos los cortes para U. Andes, U. Andrés Bello, Colegio Tabancura y Oasis Fitness',
   'Perfilado de cejas gratis los martes y miércoles al agendar servicio',
   'Trae un amigo: uno obtiene 50% de descuento en un servicio adicional',
 ]
