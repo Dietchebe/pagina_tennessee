@@ -13,10 +13,14 @@ export const SERVICES = {
     {
       name: 'Corte Clásico',
       price: 17900,
+      promoPrice: 14320,
+      promoLabel: 'Primera vez',
     },
     {
       name: 'Corte con Barba',
       price: 26900,
+      promoPrice: 21520,
+      promoLabel: 'Primera vez',
     },
   ],
   barba: [
