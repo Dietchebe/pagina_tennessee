@@ -52,7 +52,7 @@ export default function Hero() {
         <div id="hero-booking-trigger" className="h-px w-px mx-auto mt-6" aria-hidden="true" />
 
         <p className="mt-20 text-brand-amber text-[10px] tracking-[0.5em] uppercase font-sans">
-          — Av. Nueva Costanera 12255 — Las Condes * Cantagallo
+          Av. Nueva Las Condes 12255 * Cantagallo
         </p>
 
       </div>

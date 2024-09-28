@@ -44,7 +44,7 @@ export default function Header() {
           }`}
         >
           <Image
-            src="/assets/imagenes/logo_tennessee/logo_nuevo_tennessee.png"
+            src="/assets/imagenes/logo_tennessee/logo_sin_titulo_3.png"
             alt="Tennessee Barber Shop"
             width={144}
             height={144}

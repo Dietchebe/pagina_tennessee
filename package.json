@@ -6,7 +6,7 @@
     "node": ">=20.9.0 <25"
   },
   "scripts": {
-    "dev": "node scripts/assert-project-root.mjs && next dev",
+    "dev": "fnm exec --using 22 sh -c 'node scripts/assert-project-root.mjs && next dev'",
     "doctor": "node scripts/doctor.mjs",
     "build": "next build",
     "start": "next start",

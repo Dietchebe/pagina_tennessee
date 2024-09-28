@@ -73,7 +73,7 @@ export default function Footer() {
           <div className="flex flex-col items-center text-center md:justify-self-center md:items-center md:text-center max-w-xs mx-auto">
             <div className="mb-6">
               <Image
-                src="/assets/imagenes/logo_tennessee/logo_nuevo_tennessee.png"
+                src="/assets/imagenes/logo_tennessee/logo_sin_titulo_3.png"
                 alt="Tennessee Barber Shop"
                 width={140}
                 height={140}
