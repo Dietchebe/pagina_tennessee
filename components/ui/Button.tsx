@@ -5,6 +5,8 @@ type ButtonProps = {
   variant?: 'primary' | 'outline'
   size?: 'sm' | 'md' | 'lg' | 'xl'
   className?: string
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
 }
 
 export default function Button({
@@ -14,6 +16,8 @@ export default function Button({
   variant = 'primary',
   size = 'md',
   className = '',
+  type = 'button',
+  disabled = false,
 }: ButtonProps) {
   const base =
     'inline-flex items-center justify-center font-sans tracking-widest uppercase transition-all duration-300 font-medium'
@@ -50,7 +54,7 @@ export default function Button({
   }
 
   return (
-    <button type="button" onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} className={classes} disabled={disabled}>
       {children}
     </button>
   )
