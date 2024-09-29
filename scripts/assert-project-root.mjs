@@ -29,7 +29,7 @@ if (major === 20 && minor < 9) {
 
 if (!fs.existsSync(packageJsonPath)) {
   fail(
-    `No se encontró package.json en ${cwd}.\nEjecuta el comando dentro de /Users/benjaminclaps/Desktop/programando/tennessee.`,
+    `No se encontró package.json en ${cwd}.\nEjecuta el comando dentro del directorio del proyecto.`,
   );
 }
 
