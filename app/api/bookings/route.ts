@@ -49,6 +49,16 @@ export async function POST(request: Request) {
 
     const result = insertStmt.run(name, email, phone, barber, date, time);
 
+    // Enviar datos a Google Sheets
+    try {
+      await fetch('https://script.google.com/macros/s/AKfycbxo0CCe7tTUTdkjPKrLAf5ORGix-IHqtfOXsjBlz0Lu-_YHwzmQ8dN8M7CR8Iw8NtLt/exec', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, phone, barber, date, time }),
+      });
+    } catch (sheetError) {
+      console.error('Error enviando a Google Sheets:', sheetError);
+    }
+
     return NextResponse.json({ success: true, bookingId: result.lastInsertRowid }, { status: 201 });
   } catch (error) {
     console.error('Error creating booking:', error);
