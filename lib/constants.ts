@@ -1,5 +1,4 @@
-export const AGENDAPRO_URL =
-  'https://tennesseebarbershop.site.agendapro.com/cl/sucursal/5404?rwg_token=AFd1xnG6dr_M47BrNvXn5tO88pg0dtJUp1uum7KOjnTHDhn7D_iukGU_ilGzPQD1-lVAtdcoKdZVj5_fqqtziUKKibOu6OLDrA%3D%3D'
+export const AGENDAPRO_URL = '/agendar'
 export const WHATSAPP_URL = 'https://wa.me/56956182885'
 
 export const SERVICES = {
