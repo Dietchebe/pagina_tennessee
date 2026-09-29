@@ -66,7 +66,7 @@ export async function POST(request: Request) {
       const apiKey = process.env.GEMINI_API_KEY;
       if (apiKey) {
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-lite-latest" });
         const prompt = `Eres el asistente virtual de la barbería Tennessee. Escribe un mensaje muy corto y amigable (máximo 2 oraciones, menos de 30 palabras) confirmando la reserva de ${name} con el barbero ${barber} para el día ${date} a las ${time}. Menciona algún rasgo de experto del barbero (ej: Víctor en degradados, Ronald clásico, Barreto moderno o barba). No uses saludos excesivos, sé directo.`;
         
         // Retry logic for 503 errors
@@ -85,11 +85,11 @@ export async function POST(request: Request) {
         }
       } else {
         console.warn("Falta GEMINI_API_KEY en las variables de entorno.");
-        aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada. (Debug: Falta API Key en Vercel)`;
       }
     } catch (aiError: any) {
       console.error("Error generando mensaje con IA:", aiError);
-      aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada. (Debug: ${aiError.message || aiError})`;
+      // Fallback limpio y seguro para la presentación
+      aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada con éxito.`;
     }
 
     return NextResponse.json({ success: true, bookingId: result.lastInsertRowid, aiMessage }, { status: 201 });
