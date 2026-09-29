@@ -85,9 +85,11 @@ export async function POST(request: Request) {
         }
       } else {
         console.warn("Falta GEMINI_API_KEY en las variables de entorno.");
+        aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada. (Debug: Falta API Key en Vercel)`;
       }
-    } catch (aiError) {
+    } catch (aiError: any) {
       console.error("Error generando mensaje con IA:", aiError);
+      aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada. (Debug: ${aiError.message || aiError})`;
     }
 
     return NextResponse.json({ success: true, bookingId: result.lastInsertRowid, aiMessage }, { status: 201 });
