@@ -39,6 +39,7 @@ export default function AgendarPage() {
   const [availableSlots, setAvailableSlots] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
+  const [aiResponse, setAiResponse] = useState("")
 
   const updateForm = (key: string, value: string) => {
     setFormData(prev => ({ ...prev, [key]: value }))
@@ -92,6 +93,9 @@ export default function AgendarPage() {
         setMessage({ type: 'error', text: data.error || 'Hubo un error al reservar' })
       } else {
         setMessage({ type: 'success', text: '¡Reserva confirmada con éxito!' })
+        if (data.aiMessage) {
+          setAiResponse(data.aiMessage)
+        }
         setStep(4) // Success step
       }
     } catch (error) {
@@ -257,6 +261,16 @@ export default function AgendarPage() {
                 Te esperamos el {formData.date} a las {formData.time} hrs.<br/>
                 Barbero: {formData.barber}
               </p>
+              
+              {aiResponse && (
+                <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl relative">
+                  <div className="absolute -top-3 -left-3 bg-white text-black text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                    <span className="text-sm">✨</span> Asistente IA
+                  </div>
+                  <p className="text-white italic">"{aiResponse}"</p>
+                </div>
+              )}
+
               <div className="pt-8">
                 <Button href="/">Volver al Inicio</Button>
               </div>

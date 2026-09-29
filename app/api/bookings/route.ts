@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -59,7 +60,37 @@ export async function POST(request: Request) {
       console.error('Error enviando a Google Sheets:', sheetError);
     }
 
-    return NextResponse.json({ success: true, bookingId: result.lastInsertRowid }, { status: 201 });
+    // Generar mensaje de bienvenida con IA
+    let aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada.`;
+    try {
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (apiKey) {
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
+        const prompt = `Eres el asistente virtual de la barbería Tennessee. Escribe un mensaje muy corto y amigable (máximo 2 oraciones, menos de 30 palabras) confirmando la reserva de ${name} con el barbero ${barber} para el día ${date} a las ${time}. Menciona algún rasgo de experto del barbero (ej: Víctor en degradados, Ronald clásico, Barreto moderno o barba). No uses saludos excesivos, sé directo.`;
+        
+        // Retry logic for 503 errors
+        for (let attempt = 0; attempt < 3; attempt++) {
+          try {
+            const result = await model.generateContent(prompt);
+            aiMessage = result.response.text().trim();
+            break; // Success, exit loop
+          } catch (e: any) {
+            if (e.status === 503 && attempt < 2) {
+              await new Promise(r => setTimeout(r, 1000)); // wait 1s and retry
+              continue;
+            }
+            throw e; // throw other errors or if out of retries
+          }
+        }
+      } else {
+        console.warn("Falta GEMINI_API_KEY en las variables de entorno.");
+      }
+    } catch (aiError) {
+      console.error("Error generando mensaje con IA:", aiError);
+    }
+
+    return NextResponse.json({ success: true, bookingId: result.lastInsertRowid, aiMessage }, { status: 201 });
   } catch (error) {
     console.error('Error creating booking:', error);
     return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
