@@ -1,8 +1,9 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 
-// Define the database path
-const dbPath = path.join(process.cwd(), 'bookings.sqlite');
+// Define the database path (Vercel is read-only except for /tmp)
+const isProd = process.env.NODE_ENV === 'production';
+const dbPath = isProd ? '/tmp/bookings.sqlite' : path.join(process.cwd(), 'bookings.sqlite');
 
 // Initialize the database
 const db = new Database(dbPath);
