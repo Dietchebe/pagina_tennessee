@@ -1,0 +1,417 @@
+AUTOMATIZACIONES Y AGENTES DE IA PARA MARKETING  ·  MAGÍSTER MKT UAI  ·  2026-2
+Proyecto Final
+Qué construir, cómo se entrega y cómo se evalúa
+
+Profesor: Benjamín Happey  ·  Versión 1.2 · 2026-2
+
+1  ·  VISIÓN GENERAL
+Qué es el proyecto y cuánto pesa
+
+El proyecto final es el cierre del curso: cada grupo (libre, de máximo 5 personas) resuelve un problema real de marketing usando lo que aprendió a hacer con IA. Vale el 35% de la nota, más un 15% por el Avance que se evalúa en la sala durante el sprint de la sesión 7. Entre las dos cosas, la mitad de la nota se juega aquí.
+No se exige un producto terminado ni una app que escale. Se exigen dos cosas: una prueba de concepto que funcione — algo que corra de punta a punta en la demo, con IA adentro — y una justificación de negocio seria: por qué ese problema, cuánto vale resolverlo y con qué evidencia se sustenta. La exigencia técnica es liviana; la exigencia de mercado y valor es estricta, porque es lo que los estudiantes ya saben hacer.
+Lo que no se exige, tal como se explicó en la primera clase: repositorio de código, perfección técnica, un documento de 30 páginas. Lo que sí: un informe corto y bien estructurado (sección 8) donde el problema esté filtrado, el mercado estudiado y el valor cuantificado. Se evalúa que el estudiante aprendió a usar la IA para resolver un problema real y que puede defender con números por qué vale la pena — no que parezca ingeniero.
+El bar mínimo (lo único no negociable)
+Resuelve un problema real de marketing que pasa el filtro VRR de la sesión 1: Valor, Repetitividad, Reglas claras (sección 3).
+Tiene el trabajo de mercado y la cuantificación que le corresponde a su track: cifras antes/después en A; FODA, 5 fuerzas de Porter y entrevistas en B (sección 3).
+Usa al menos una capacidad del curso: un flujo en n8n, algo construido con Antigravity, o una operación vía MCP.
+Tiene al menos 1 llamada real a un LLM, y el resultado de esa llamada se usa para algo.
+Corre en vivo en la demo de la sesión 8.
+2  ·  QUÉ CONSTRUIR
+Los cuatro formatos válidos
+
+El proyecto tiene que calzar en al menos uno de estos cuatro formatos. Los cuatro cumplen el bar mínimo si están bien hechos, y se pueden combinar (una landing cuyo formulario dispara un flujo es la combinación natural). Se elige por el problema, no por lo que suene más impresionante.
+Formato
+Qué es
+Qué tiene que disparar la IA
+Qué se entrega como link
+1 · Flujo n8n con IA (PoC)
+El patrón de la Tarea 1 aplicado al negocio del grupo: un formulario, un correo o una planilla entra → un nodo de IA clasifica, responde o resume → algo sale (un correo, una fila, una alerta). Basta que corra de punta a punta con datos de prueba.
+El nodo de IA dentro del flujo, con su system prompt.
+El .json exportado del workflow + un Sticky Note con las pruebas.
+2 · Landing + formulario automatizado
+Una landing construida con Antigravity y publicada con URL real (como la del Tomate en la sesión 5), cuyo formulario dispara un flujo n8n con IA: el que llena el formulario recibe una respuesta, o el negocio recibe el lead clasificado.
+El formulario gatilla el flujo y el flujo llama al LLM. Ojo: una landing bonita cuyo formulario solo llena un Sheet NO cumple el bar — ahí no hay IA.
+La URL viva + el .json del flujo.
+3 · Operación de marketing vía MCP
+La parrilla de RRSS, una campaña o un video del negocio, producidos dirigiendo al agente de código con uno de los MCP de la sesión 6, a partir de una receta o prompt propio que el grupo escribió.
+El agente (que es un LLM) ejecuta la operación siguiendo la receta del grupo. La receta es propia, no la del curso.
+Una carpeta con la receta + evidencia de la operación corrida (capturas, el calendario programado, el video).
+4 · Entregable construido con el agente de código
+Un informe HTML interactivo, una presentación o un documento generado con Antigravity a partir de datos reales del negocio (lo que se hizo en la sesión 4 con los datos del Tomate).
+El agente genera el artefacto a partir de la spec que escribió el grupo: qué se buscaba, con qué datos, con qué reglas.
+Una carpeta con la spec/prompt + el artefacto resultante.
+¿Con qué formato empezar si no se sabe? Con el 1. Ya se hizo una vez con el Tomate: se cambia el negocio, la ficha y las categorías, y se tiene un proyecto válido. Si además alcanza para ponerle una landing adelante, mejor.
+3  ·  PARA QUIÉN SE CONSTRUYE Y CUÁNTO VALE
+Filtro VRR, los dos tracks y la cuantificación
+
+Esta es la parte donde la exigencia es estricta. Un flujo que corre bonito pero resuelve un problema que nadie tiene, o que nadie sabe cuánto cuesta, no es un proyecto de marketing: es un ejercicio técnico. Antes de construir, el grupo tiene que responder tres cosas: ¿este problema vale la pena automatizar? (filtro VRR), ¿para quién y en qué mercado? (según el track) y ¿cuánto vale resolverlo? (cuantificación). Las tres van en el informe.
+3.1 · El filtro VRR — obligatorio para los dos tracks
+Es el método de la sesión 1 y se aplica tal cual: el proceso que el grupo elige tiene que pasar con las tres luces en verde, y el informe tiene que mostrar el veredicto con una línea de argumento por luz. Si una luz está en rojo, no es un proyecto para este curso: se debe cambiar de proceso, no de argumento.
+Luz
+La pregunta
+Pasa
+No pasa
+V · Valor
+¿Duele en plata o en horas?
+Responder los leads que compran; el reporte que alguien arma cada lunes.
+Renombrar tres archivos al año.
+R · Repetitividad
+¿Se hace igual cada semana?
+Cada consulta de WhatsApp, cada reserva, cada lead entrante.
+El lanzamiento del año.
+R · Reglas claras
+¿Se podría escribir la receta?
+"Si el lead pide precio, envía el tarifario".
+"Haz que la marca se sienta premium".
+3.2 · Track A · Caso real
+Se resuelve un problema de un negocio real: la empresa propia, un cliente, un emprendimiento de alguien conocido. Lo que tiene que estar en el informe:
+Quién es el cliente y cómo se accedió a él: persona identificable (nombre, cargo) y una evidencia del contacto (un correo, una captura de WhatsApp, una foto de la reunión). Si el cliente es un integrante o su familia, basta con indicarlo.
+El dolor de hoy con cifras (la línea base): cuántas veces pasa, cuánto tarda cada vez, cuántas horas al mes, cuánto se pierde en CLP. Si una cifra es estimada, se debe indicar cómo se estimó.
+El resultado con la solución, cuantificado: cuánto cambia, traducido a horas/mes o CLP/mes, con los supuestos explícitos. Si se alcanzó a medir un piloto, mejor.
+Cómo queda viviendo después del curso: quién lo opera, qué pasa si falla, cuánto cuesta tenerlo andando al mes (una línea por cosa).
+3.3 · Track B · Producto o servicio propio
+Se construye algo de autoría propia para un problema que el grupo identificó. Como no hay un cliente que valide el dolor, el mercado lo valida el estudio. Lo que tiene que estar en el informe:
+Para quién es: el segmento, el arquetipo de usuario, con qué frecuencia vive el problema.
+FODA de la propuesta: fortalezas y debilidades de lo que se construye, oportunidades y amenazas del entorno. Con implicancias, no solo la matriz.
+5 fuerzas de Porter del mercado donde entra: rivalidad, nuevos entrantes, sustitutos, poder de clientes y de proveedores. Con 3 a 5 referentes nombrados (quién hace algo parecido hoy).
+Entrevistas: mínimo 5 conversaciones con potenciales usuarios, documentadas (con quién, qué preguntaron, qué respondieron, qué cambiaron por eso). Una encuesta con N grande suma, pero no reemplaza las conversaciones.
+La cuantificación: disposición a pagar que salió de las entrevistas, pricing tentativo, y la métrica principal que define éxito (la north-star: el número que el producto tiene que mover si funciona).
+Si no se consigue un caso real
+Al completar el formulario de la sesión 5 (sección 6) se declara el track. Si se eligió A y no se logró acceso real, se pasa a Track B sin penalización — pero con las exigencias de B: FODA, Porter y entrevistas. Nadie se queda sin proyecto por no tener cliente; nadie se salta el estudio de mercado.
+3.4 · Cómo cuantificar — la receta y ejemplos reales
+Cuantificar no es inventar un ROI grande: es mostrar una cadena de números que cualquiera pueda auditar. La receta, en cinco pasos:
+Frecuencia: cuántas veces ocurre el proceso (consultas al día, reservas por fin de semana, reportes al mes).
+Costo unitario hoy: cuánto tarda cada vez o cuánto se pierde cada vez (minutos por consulta, % de leads sin respuesta, CLP por venta perdida).
+Línea base mensual: frecuencia × costo unitario = horas/mes o CLP/mes que hoy se van en el problema.
+Después: cuánto de eso resuelve la solución (no siempre el 100%) y cuánto cuesta operarla al mes (tokens, n8n, hosting).
+Delta y supuestos: línea base − después − costo de operar = valor mensual. Y al lado, la lista de supuestos con su origen (medido, dicho por el cliente, estimado).
+Así lo hicieron grupos de versiones anteriores del curso. Se observa que ninguno necesitó una planilla financiera: necesitó preguntar, medir y multiplicar.
+Proyecto (curso 2026-1)
+Línea base con cifras
+Resultado cuantificado
+Reservas de un restaurante familiar por WhatsApp (Track A)
+30 reservas por fin de semana × 7 minutos de gestión manual del dueño = 14 horas al mes pendiente del celular.
+Horas liberadas al mes valorizadas en CLP a la tarifa del dueño, menos el costo de operar el flujo. Proyección con supuestos declarados.
+Alerta semanal de productos bajo rendimiento en tiendas de retail, Chile y Colombia (Track A)
+2 a 3 horas cada lunes armando el reporte a mano por tienda, con riesgo de error.
+2,5 horas por semana → 130 horas al año → 16 jornadas laborales recuperadas; −97% del tiempo del proceso.
+Vitrina de stock de termopaneles por medida + WhatsApp (Track A)
+70 consultas al mes, 30% sin respuesta → $1.050.000 en ventas perdidas.
+Piloto medido: 3 ventas recuperadas, $600.000 al mes; payback de la solución en 2,9 meses.
+Conciliación mensual de franquicias de una corredora inmobiliaria (Track A)
+4 horas por sucursal → 40 horas al mes de revisión manual, validado por el managing partner.
+Tabla antes/después: 37,5 horas liberadas al mes = $562.500 CLP mensuales.
+Respuesta a leads de una inmobiliaria por correo y WhatsApp (Track A)
+35 leads al mes, 6 a 8 horas de demora en la primera respuesta, 20% de leads perdidos.
+$837.000 al mes de valor neto; payback en ~3 meses; cada supuesto auditable.
+Inventario y pedidos a proveedores para restaurantes (Track B)
+Segmento y arquetipo definidos; tabla de frecuencia de quiebres de stock; referentes Fudo, Toteat y otros en Porter/FODA.
+5 conversaciones con disposición a pagar → pricing en 2 planes fundado en las entrevistas + north-star justificada.
+Triage automático de incidentes para equipos de desarrollo chicos (Track B)
+ICP preciso (5 a 50 devs sin SRE), frecuencia del dolor y techo de mercado; 6 referentes en Porter/FODA.
+5 entrevistas documentadas (guion, análisis, capturas) → 3 planes con precio en CLP y north-star = organizaciones pagantes activas.
+Planificador de horarios para la toma de ramos (Track B)
+Dolor por semestre en horas, contexto y frecuencia; encuesta con 35 respuestas verificadas.
+North-star: menos de 10 minutos por alumno para 220 usuarios; pricing y roadmap v1-v3.
+Lo que baja la nota en este bloque, visto en cursos anteriores: dolor descrito solo con adjetivos ("toma mucho tiempo") sin una cifra; 2 conversaciones cuando el mínimo eran 5; un pricing que nadie validó; un ROI sin supuestos. Lo que la sube: cifras que el cliente confirmó, un piloto aunque sea de una semana, y supuestos honestos.
+4  ·  HERRAMIENTAS
+n8n y Antigravity como base, libertad con una línea
+
+La base del curso son dos herramientas: n8n para los flujos y Antigravity como agente de código para construir artefactos y la landing. Alrededor de esa base, el stack es libre: se puede usar cualquier otra herramienta que cumpla con los lineamientos y los objetivos de aprendizaje del curso (GitHub + Vercel para publicar y los MCP de marketing de la sesión 6 son las referencias, no obligaciones). Si se reemplaza una pieza de la base por otra equivalente (Make en vez de n8n, Cursor o Claude Code en vez de Antigravity, otro hosting), es posible hacerlo: solo debe explicarse en una línea del informe.
+Lo que no cambia con la herramienta: tiene que haber una llamada real a un LLM adentro, y tiene que correr en vivo.
+5  ·  PLAZOS
+Los hitos del proyecto
+
+Cuándo
+Qué hace el grupo
+Cierre de la sesión 4
+Se lanza el proyecto. Los grupos son libres, de máximo 5 personas; se declaran en el formulario de la sesión 5.
+Sesión 5
+Cada grupo completa el formulario "el proyecto en 5 líneas" (sección 6). Sin nota, sin pre-entrega; el profesor responde verde o ámbar en la misma sesión o en los 3 días siguientes.
+Sesión 7
+Sprint en clase sobre el proyecto del grupo. Al cierre, el Avance se evalúa en la sala (15% — sección 7).
+Antes del inicio de la sesión 8
+El grupo sube, por el link de entrega publicado en webcursos, el link a lo construido + el informe en PDF (sección 8).
+Sesión 8
+Presentación: 2 min pitch + 5 min demo en vivo + 3 min Q&A.
+Post-sesión 8 (48-72h)
+Los integrantes llenan el formulario anónimo de evaluación cruzada de sus compañeros.
+Las fechas exactas de cada sesión y de cada entrega se publican en webcursos. Este documento define la estructura; el calendario vive allá.
+Cómo se reparten los 10 minutos en la sesión 8
+2 min — Pitch: el problema, para quién, la cifra que lo justifica, qué se construyó y por qué ese formato.
+5 min — Demo en vivo: la solución corriendo de punta a punta con datos reales o de prueba. Es el corazón de la presentación.
+3 min — Q&A: se defienden los prompts, las decisiones y los números.
+6  ·  EL PROYECTO EN 5 LÍNEAS
+El único hito antes del sprint — un formulario, sin nota
+
+No hay pre-entrega ni documento: en la sesión 5 cada grupo completa un formulario corto (el link va por webcursos), una sola respuesta por grupo. No lleva nota, pero es obligatorio: es lo que permite indicar a tiempo si el proyecto calza o hay que ajustarlo, antes de que se gaste el sprint en algo que no califica. Las preguntas cubren, en versión corta, lo que después exige el informe. Las cinco líneas:
+El negocio o el producto: para quién se construye y qué track (A caso real / B producto propio).
+El problema y el filtro VRR: qué duele hoy, en una frase, y las tres luces (Valor, Repetitividad, Reglas claras) con una línea de argumento por luz.
+La primera cifra. Track A: frecuencia y costo unitario del proceso hoy (la línea base, aunque sea estimada). Track B: los 3-5 referentes identificados y con quiénes se harán las entrevistas.
+El formato y qué dispara la IA: cuál de los cuatro (o qué combinación), en qué paso entra el LLM y qué hace con lo que recibe.
+Los integrantes y quién toma qué — incluido quién toma el estudio de mercado y la cuantificación.
+El profesor responde verde (adelante) o ámbar (ajustar y seguir) en la misma sesión 5 o dentro de los 3 días siguientes. Un Track A sin acceso real al negocio pasa a Track B sin castigo. Un problema que no pasa el filtro VRR vuelve ámbar hasta que se cambie de proceso.
+7  ·  EL AVANCE (SESIÓN 7)
+El checkpoint con nota — 15%
+
+La sesión 7 es un sprint en clase sobre el proyecto de cada grupo: dos módulos completos con el profesor pasando por las mesas. Al cierre, el profesor evalúa el avance de cada grupo mirándolo en su pantalla. No es una presentación: es mostrar en qué etapa está el proyecto.
+Rúbrica del Avance (escala 1 a 7)
+Item
+Puntos
+Qué se revisa
+Base
+1.0
+Todos parten con esto.
+A · Problema filtrado y con cifra
+1.0
+Se sabe para quién se construye, el proceso pasa el filtro VRR y ya se tiene la línea base con al menos una cifra real (A) o las primeras entrevistas hechas (B).
+B · Formato elegido y la IA ubicada
+1.0
+Se sabe cuál de los cuatro formatos es y en qué paso entra el LLM.
+C · Algo funcionando
+3.0
+Corre al menos un tramo con la llamada al LLM adentro (3.0). Maqueta avanzada pero sin IA todavía (1.5). Nada corriendo (0).
+D · Plan de cierre
+1.0
+Qué falta — en lo técnico y en el informe —, quién lo toma y cuál es el riesgo principal. Concreto y creíble.
+Nota Avance máxima
+7.0
+
+El Avance califica en qué etapa está cada grupo ese día, no el resultado final. Lo que se muestre no compromete la nota del proyecto: se puede cambiar de rumbo después si el feedback lo amerita. Y si algún grupo va atrasado, ese día el profesor está en la sala para eso.
+8  ·  ENTREGA
+Un link y un informe corto
+
+Antes del inicio de la sesión 8, cada grupo sube por el link de entrega publicado en webcursos (la misma mecánica que la Tarea 1: nada va al Drive del curso) dos cosas: el link a lo construido y el informe en PDF. Sin eso no hay demo, y sin demo no hay nota en los ítems que más pesan.
+Qué es "el link" según el formato
+Flujo n8n: el .json exportado del workflow (Download) + un Sticky Note adentro con el grupo y las pruebas que se corrieron.
+Landing + formulario: la URL publicada + el .json del flujo que dispara el formulario.
+Operación vía MCP: una carpeta con la receta/prompt que se escribió + la evidencia de la operación (capturas, el calendario programado, el video).
+Entregable con el agente de código: una carpeta con la spec/prompt + el artefacto resultante (el HTML, el ppt, el docx).
+El informe (PDF, entre 4 y 8 páginas sin contar anexos)
+Es un informe estructurado, no un one-pager y tampoco el documento largo del Magíster en Business Analytics. Los títulos son fijos y van en este orden; lo que cambia según el track es el contenido de la sección 3. Un lector que no estuvo en la demo tiene que entender qué problema se resolvió, por qué vale la pena y cómo funciona. Prompts, capturas y evidencia van en anexos, que no cuentan para el largo.
+#
+Título
+Qué contiene
+1
+Identificación
+Nombre del proyecto, grupo, integrantes, track (A o B), formato(s) elegido(s). Media página.
+2
+El problema y el filtro VRR
+Para quién, qué duele hoy y el veredicto VRR: una línea de argumento por luz (Valor, Repetitividad, Reglas claras).
+3A
+Cliente, línea base y resultado (solo Track A)
+3A.1 El cliente y la evidencia del contacto · 3A.2 El dolor de hoy con cifras (frecuencia × costo unitario = línea base mensual) · 3A.3 El resultado con la solución en horas/mes o CLP/mes, con supuestos · 3A.4 Cómo queda viviendo después del curso (quién opera, qué pasa si falla, costo mensual).
+3B
+Mercado y validación (solo Track B)
+3B.1 Para quién: segmento, arquetipo, frecuencia del problema · 3B.2 FODA de la propuesta con implicancias · 3B.3 Las 5 fuerzas de Porter con 3 a 5 referentes · 3B.4 Entrevistas: mínimo 5, documentadas · 3B.5 Cuantificación: disposición a pagar, pricing tentativo y north-star.
+4
+La solución
+Qué se construyó y cómo funciona de punta a punta. Un dibujo del flujo (entra → IA → sale) vale más que dos párrafos. Dónde entra el LLM y qué hace con lo que recibe.
+5
+Herramientas
+Qué se usó y, si se reemplazó algo de la base (n8n, Antigravity), por qué. Una línea por reemplazo.
+6
+Criterio en el uso de la IA
+Cómo se estructuraron los prompts, qué hace la IA cuando algo no está en su ficha, qué casos se probaron (incluido uno que no debía responder) y qué se corrigió después de probar.
+7
+Quién hizo qué
+Una línea por integrante. Es la referencia para la evaluación cruzada.
+Anexos
+Prompts, evidencia y link
+El texto completo de los prompts clave (system prompt, receta del MCP, spec del artefacto) · evidencia del cliente o de las entrevistas · capturas de las pruebas · el link a lo construido.
+Entre 4 y 8 páginas más anexos. Si el cuerpo se pasa a 12 porque se pegaron los prompts adentro, deben moverse al anexo. Si supera las 20, no se lee completo, y lo que no se lee no se evalúa.
+9  ·  EVALUACIÓN
+Cómo se calcula la nota
+
+El proyecto tiene dos rúbricas, las dos en escala 1 a 7 con base 1.0. La rúbrica del informe evalúa la solución: el problema, el mercado, la cuantificación y que lo construido funcione con IA adentro (la demo es la evidencia de que funciona; el informe, de que vale la pena). La rúbrica de la presentación evalúa cómo se cuenta y cómo se defiende en la sala. Después entra la evaluación cruzada para la nota individual.
+Rúbrica 1 · El informe y la solución (escala 1 a 7)
+Item
+Puntos
+Qué evalúa
+Base
+1.0
+Todos parten con esto.
+A · Problema real y filtro VRR
+1.0
+El problema es de alguien concreto, está en la sección 2 del informe y pasa las tres luces con argumento.
+B · Mercado y cuantificación (según track)
+2.0
+Track A: cliente con evidencia, línea base con cifras, resultado cuantificado con supuestos, plan de operación. Track B: segmento, FODA, Porter con referentes, ≥5 entrevistas documentadas, disposición a pagar + pricing + north-star.
+C · La solución funciona
+2.0
+Corre en vivo de punta a punta, con al menos una llamada real a un LLM cuyo resultado se usa. Sin LLM real, 0.
+D · Criterio en el uso de la IA
+1.0
+Los prompts tienen estructura, la IA sabe cuándo no responder, se verificó lo que produce, y se explica en la sección 6 del informe.
+Nota Informe máxima
+7.0
+
+Rúbrica 2 · La presentación (escala 1 a 7)
+Es la misma tabla que se usó en el dictado anterior del curso, ajustada a los 10 minutos: 2 de pitch, 5 de demo, 3 de Q&A.
+Item
+Puntos
+Qué evalúa
+Guía de puntaje
+Base
+1.0
+Todos parten con esto.
+
+D · Pitch + demo en vivo
+3.0
+Narrativa clara (problema → cifra → solución → demo), demo en vivo fluida, 10 minutos bien usados.
+3.0 excelente · 1.5 la demo funciona pero el pitch es desordenado o se pasa del tiempo · 0 la demo no funciona o no hay estructura.
+E · Q&A / defensa
+3.0
+Se defiende cada decisión — los prompts, el formato, los números — con criterio, aunque no se sepa todo.
+3.0 excelente · 1.5 respuestas vagas pero se entiende lo básico · 0 no se puede defender el proyecto ("no sé, lo escribió la IA").
+Nota Presentación máxima
+7.0
+
+
+Evaluación cruzada (escala 1 a 7)
+Después de la sesión 8 se recibe un formulario anónimo donde cada uno califica a sus compañeros de grupo en escala 1 a 7, y describe en una línea qué aportó cada uno. La nota cruzada es el promedio de lo que asignaron los pares. No hay autocalificación.
+La matemática
+Nota Proyecto (grupal)      =  0.7 × Nota Informe  +  0.3 × Nota Presentación Nota Proyecto (individual)  =  0.7 × Nota Proyecto grupal  +  0.3 × Nota Eval Cruzada Nota Avance (sesión 7)      =  grupal, sin cruzada
+Ejemplo
+Un grupo saca 6.0 en el informe y 7.0 en la presentación: nota grupal 0.7 × 6.0 + 0.3 × 7.0 = 6.3. Ana, a quien todos valoran (cruzada 6.5), queda con 0.7 × 6.3 + 0.3 × 6.5 = 6.36. Pedro, que no apareció (cruzada 3.0), queda con 0.7 × 6.3 + 0.3 × 3.0 = 5.31. Mismo proyecto, un punto de diferencia.
+10  ·  DETALLE DE LA RÚBRICA DEL INFORME
+Cómo se asigna cada item
+
+Los tres niveles son referencias: se permiten valores intermedios cuando un grupo cae entre dos.
+A · Problema real y filtro VRR (1.0 pt)
+Nivel
+Puntos
+Cuándo se asigna
+Excelente
+1.0
+Problema concreto de alguien identificable, y el veredicto VRR con una línea de argumento por luz que se sostiene.
+Aceptable
+0.5
+El problema se entiende pero es genérico, o el VRR está declarado sin argumento (tres ticks y nada más).
+Insuficiente
+0.0
+No hay problema real: es un ejercicio técnico sin destinatario, es el Tomate con otro nombre, o el proceso claramente no pasa una de las luces.
+B · Mercado y cuantificación (2.0 pts)
+Es el bloque donde más se diferencia un proyecto de marketing de un ejercicio de n8n. Se evalúa según el track:
+Track A · Caso real
+Sub-item
+Puntos
+Excelente (puntaje completo)
+Cero
+B1 · Cliente + evidencia de contacto
+0.5
+Persona identificable con cargo y una evidencia del intercambio (correo, captura, foto).
+Cliente genérico ("una pyme") o sin evidencia.
+B2 · Dolor con cifras (línea base)
+0.5
+Frecuencia, costo unitario y línea base mensual en horas o CLP; las estimaciones dicen de dónde salen.
+Solo adjetivos: "toma mucho tiempo", "se pierden clientes".
+B3 · Resultado cuantificado
+0.5
+Cuánto cambia con la solución, en horas/mes o CLP/mes, menos el costo de operarla, con supuestos explícitos. Un piloto medido es el ideal.
+Sin cuantificación, o un ROI sin supuestos.
+B4 · Cómo queda viviendo
+0.5
+Quién opera, qué pasa si falla, costo mensual de tenerlo andando.
+No dice quién lo opera después del curso.
+Track B · Producto o servicio propio
+Sub-item
+Puntos
+Excelente (puntaje completo)
+Cero
+B1 · Segmento y usuario
+0.4
+Segmento, arquetipo y frecuencia del problema, con datos.
+"Para todos" o usuario vago.
+B2 · FODA + 5 fuerzas de Porter
+0.6
+Los dos frameworks aplicados a la propuesta, con implicancias, y 3 a 5 referentes nombrados.
+Solo uno de los dos, matrices sin implicancias, o sin referentes.
+B3 · Entrevistas
+0.5
+Mínimo 5 conversaciones documentadas: con quién, qué preguntaron, qué respondieron, qué cambiaron por eso.
+Menos de 5, o sin evidencia. Una encuesta sola no reemplaza las conversaciones.
+B4 · Cuantificación
+0.5
+Disposición a pagar que salió de las entrevistas, pricing tentativo realista y north-star definida.
+Falta alguno de los tres, o el pricing no se apoya en nada.
+C · La solución funciona (2.0 pts)
+Nivel
+Puntos
+Cuándo se asigna
+Excelente
+2.0
+Corre en vivo de punta a punta, sin pasos a mano entre medio, y la llamada al LLM produce algo que el flujo usa (responde, clasifica, genera).
+Aceptable
+1.0
+Corre a medias: hay que ejecutar pasos a mano, o un tramo falla y se muestra con una ejecución guardada.
+Insuficiente
+0.0
+No corre, o no hay llamada real a un LLM (respuestas escritas a mano, un chat aparte pegado, una landing cuyo formulario solo llena una planilla).
+Sin llamada real a un LLM, el item C es 0. Es el único no negociable técnico del curso: el proyecto es sobre trabajar con IA, y si la IA no está adentro, no hay proyecto.
+D · Criterio en el uso de la IA (1.0 pt)
+Las buenas prácticas del curso, aplicadas. Se revisan cuatro cosas en la sección 6 del informe y se defienden en el Q&A:
+Los prompts tienen estructura: rol, ficha o contexto, reglas — no un párrafo improvisado dentro del nodo.
+La IA sabe cuándo no responder: hay una regla o una salida para lo que no está en su ficha (la "otra" de la Tarea 1).
+Se verificó lo que produce: se probaron casos, incluyendo uno que no debería responder, y se puede mostrar.
+Si se usó el agente de código: se especificó antes de construir (la spec existe) y se revisó lo que entregó.
+Nivel
+Puntos
+Cuándo se asigna
+Excelente
+1.0
+Las cuatro están, y en el Q&A se explica por qué cada prompt dice lo que dice.
+Aceptable
+0.5
+Dos o tres están; en el Q&A se entiende lo básico pero hay respuestas vagas.
+Insuficiente
+0.0
+Prompts improvisados, sin pruebas, y "no sé, lo escribió la IA" en el Q&A.
+11  ·  POLÍTICAS
+Las reglas del juego
+
+Política de IA
+La IA está bienvenida para construir el proyecto y para redactar el informe: Antigravity, ChatGPT, Claude, lo que se prefiera. Es el punto del curso.
+Toda parte generada por IA tiene que ser entendida por quien la presenta. Eso incluye las cifras: si la IA estimó un ROI, se debe saber de dónde salió cada número.
+El Q&A de la sesión 8 es el filtro: si no se puede explicar por qué un prompt dice lo que dice o de dónde sale una cifra, baja el item E de la presentación.
+Política de re-uso (y el Tomate)
+Se puede reusar todo lo del curso: el flujo de la Tarea 1, la landing del Tomate, las recetas de los MCP. Para eso se construyeron.
+Lo que no se puede: entregar El Tomate Mecánico como proyecto — ni el flujo de la Tarea 1 ni la landing con otro logo. La arquitectura se copia; el negocio, el problema y los datos tienen que ser propios del grupo.
+Flujos o plantillas de internet: OK si se citan y se entienden.
+Política anti-freerider
+El formulario de evaluación cruzada pregunta qué aportó cada uno, no solo una nota.
+Si el profesor recibe señales convergentes desde varios integrantes ("X no hizo nada"), puede bajar la nota individual adicionalmente o convocar a entrevista.
+Política de entrega
+Link + informe en PDF por el link de entrega de webcursos antes del inicio de la sesión 8.
+Sin entrega no hay demo, y sin demo el item C del informe (2.0 pts) y el item D de la presentación (3.0 pts) son 0.
+Un mismo proyecto entregado por dos grupos se califica 1.0 en los dos.
+Ausencias y recuperación
+Se rigen por el syllabus del curso: con licencia médica aprobada por Secretaría, el Avance se recupera con una tarea individual definida por el profesor, y el proyecto final se maneja caso a caso según la situación del estudiante y del grupo.
+12  ·  FAQ
+Preguntas frecuentes
+
+¿Basta con un flujo en n8n como el de la Tarea 1?
+En lo técnico, sí: si resuelve un problema real de otro negocio (no el Tomate) y corre en vivo, no tiene que ser más grande que la Tarea 1. Un flujo con tres nodos y un LLM bien usado, aplicado a un problema de verdad, con su informe completo — filtro VRR, cifras o estudio de mercado según el track — puede sacar 7.0. Lo que no basta es el flujo sin el informe.
+¿Por qué tanta exigencia en mercado y cuantificación si lo técnico es liviano?
+Porque es lo que los estudiantes ya saben hacer y lo que van a hacer después del curso: no van a programar flujos, van a decidir qué automatizar y convencer a alguien de que vale la pena. Un PoC sin número es una demo; un PoC con línea base, resultado y supuestos es una propuesta que un gerente puede aprobar.
+¿Y una landing sola, sin flujo?
+No. Una landing con un formulario que solo llena una planilla no tiene IA adentro, y sin llamada real a un LLM el item C es 0. La landing cuenta cuando su formulario dispara un flujo con IA — o cuando el contenido de la landing lo generó el agente de código a partir de la spec del grupo (formato 4) y además hay un flujo detrás.
+¿Es obligatorio tener un cliente real?
+No. Si no se consigue acceso a un negocio real, se construye para un producto o servicio propio (Track B). Pero el Track B no es el camino fácil: en vez de un cliente que valide, la validación corre por cuenta del grupo, con FODA, Porter y al menos 5 entrevistas. Nadie se queda sin proyecto; nadie se salta la validación.
+¿Las entrevistas del Track B pueden ser una encuesta?
+Una encuesta suma — grupos anteriores llegaron con 35 y 60 respuestas y eso pesó a favor —, pero no reemplaza las 5 conversaciones. En una conversación se descubre el dolor que no se preguntó; en una encuesta solo se confirma lo que ya se suponía.
+¿Es obligatorio usar n8n y Antigravity?
+Son la base del curso, y con ellas se cubren todos los formatos. Pero se puede reemplazar cualquier pieza por otra herramienta que cumpla los mismos objetivos de aprendizaje, explicándolo en una línea de la sección 5 del informe. Lo que no cambia: una llamada real a un LLM y que corra en vivo.
+¿Se puede hacer el proyecto de forma individual?
+No. El proyecto es grupal por diseño: grupos libres de máximo 5 personas (no tienen que ser los de la Tarea 1). Si un grupo se desarma, el estudiante debe escribir al profesor para ser reubicado.
+¿Se puede usar el Tomate adaptado a otro negocio?
+La arquitectura sí — es el andamio del curso. El proyecto no: un Tomate con otro logo es el lab con más pasos. Se cambia el negocio, la ficha, las categorías y los datos, y entonces es un proyecto propio.
+¿Qué cuenta como "llamada real a un LLM"?
+Un nodo de IA o un agente dentro del flujo n8n del grupo, el agente de código ejecutando una receta propia, o una llamada a la API de un modelo. Lo que no cuenta: abrir ChatGPT aparte, pegar la respuesta a mano en el flujo, y decir que ahí está la IA.
+¿Qué pasa si en la sesión 7 un grupo casi no tiene avance?
+El Avance califica ese día, así que esa nota lo va a reflejar. Pero el proyecto sigue: el sprint existe justamente para que ningún grupo llegue a la sesión 8 descubriendo recién que está atrasado. Ese día el profesor está pasando por las mesas.
+¿La evaluación cruzada puede llevar a reprobar?
+Puede bajar la nota considerablemente si el grupo asigna 1.0 unánime. Combinada con la política anti-freerider, sí, puede llevar a reprobar. Si el aporte es real, la nota se beneficia.
+
+
+Magíster en Marketing UAI  ·  Automatizaciones y agentes de IA para Marketing  ·  2026-2
