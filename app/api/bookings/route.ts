@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import db from '@/lib/db';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import nodemailer from 'nodemailer';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -90,6 +91,44 @@ export async function POST(request: Request) {
       console.error("Error generando mensaje con IA:", aiError);
       // Fallback limpio y seguro para la presentación
       aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada con éxito.`;
+    }
+
+    // --- Enviar correo al cliente ---
+    try {
+      const emailUser = process.env.EMAIL_USER;
+      const emailPass = process.env.EMAIL_PASSWORD;
+      
+      if (emailUser && emailPass && email) {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: emailUser,
+            pass: emailPass
+          }
+        });
+
+        await transporter.sendMail({
+          from: `"Tennessee Barber Shop" <${emailUser}>`,
+          to: email,
+          subject: "Confirmación de tu reserva - Tennessee",
+          text: aiMessage,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 10px;">
+              <h2 style="color: #2c3e50; text-align: center;">Tennessee Barber Shop</h2>
+              <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                <p style="font-size: 16px; color: #333; margin: 0;">${aiMessage}</p>
+              </div>
+              <p style="color: #666; font-size: 14px; text-align: center;">Nos vemos el ${date} a las ${time} hrs con ${barber}.</p>
+            </div>
+          `
+        });
+        console.log(`Correo de confirmación enviado con éxito a ${email}`);
+      } else {
+        console.warn("Faltan credenciales de correo (EMAIL_USER o EMAIL_PASSWORD) o el email del cliente está vacío.");
+      }
+    } catch (emailError) {
+      console.error("Error enviando el correo electrónico:", emailError);
+      // No lanzamos el error para no romper la reserva si el correo falla
     }
 
     return NextResponse.json({ success: true, bookingId: result.lastInsertRowid, aiMessage }, { status: 201 });
