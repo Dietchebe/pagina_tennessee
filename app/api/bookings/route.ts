@@ -51,15 +51,11 @@ export async function POST(request: Request) {
 
     const result = insertStmt.run(name, email, phone, barber, date, time);
 
-    // Enviar datos a Google Sheets
-    try {
-      await fetch('https://script.google.com/macros/s/AKfycbxo0CCe7tTUTdkjPKrLAf5ORGix-IHqtfOXsjBlz0Lu-_YHwzmQ8dN8M7CR8Iw8NtLt/exec', {
-        method: 'POST',
-        body: JSON.stringify({ name, email, phone, barber, date, time }),
-      });
-    } catch (sheetError) {
-      console.error('Error enviando a Google Sheets:', sheetError);
-    }
+    // Enviar datos a Google Sheets (en paralelo para ahorrar tiempo y evitar el timeout de 10s de Vercel)
+    const sheetPromise = fetch('https://script.google.com/macros/s/AKfycbxo0CCe7tTUTdkjPKrLAf5ORGix-IHqtfOXsjBlz0Lu-_YHwzmQ8dN8M7CR8Iw8NtLt/exec', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, phone, barber, date, time }),
+    }).catch(sheetError => console.error('Error enviando a Google Sheets:', sheetError));
 
     // Generar mensaje de bienvenida con IA
     let aiMessage = `¡Muchas gracias ${name}! Tu cita ha sido confirmada.`;
@@ -130,6 +126,9 @@ export async function POST(request: Request) {
       console.error("Error enviando el correo electrónico:", emailError);
       // No lanzamos el error para no romper la reserva si el correo falla
     }
+    
+    // Esperar a que Google Sheets termine (ya corrió en paralelo con la IA y el correo)
+    await sheetPromise;
 
     return NextResponse.json({ success: true, bookingId: result.lastInsertRowid, aiMessage }, { status: 201 });
   } catch (error) {
